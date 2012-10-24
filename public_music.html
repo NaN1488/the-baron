@@ -1,0 +1,31 @@
+<head>
+  <title>public_music</title>
+</head>
+
+<body>
+  {{> player}}
+</body>
+
+<template name="hello">
+  <h1>Hello World!</h1>
+  {{greeting}}
+  <input type="button" value="Click" />
+</template>
+
+<template name="player">
+  <h1>Comunity Radio</h1>
+	<!-- <div><h3>url: {{current_video}}</h3></div>-->
+	{{#if current_video}}
+    <iframe width="560" height="315" src="http://www.youtube.com/embed/{{current_video}}?&autoplay=1" frameborder="0" allowfullscreen></iframe>
+  {{/if}}
+  <br>
+  <label for="url"> Pegar la URL de youtube 
+    <input  id="url" type="text" name="url" placeholder="url de youtube">
+  </label>
+  <input id="play" type="button" value="play" />
+  <ul>
+    {{#each videos}}
+      <li>{{this.key}} {{#if this.current}}<strong>Playing</strong>{{/if}}</li>
+    {{/each}}
+  </ul>
+</template>
