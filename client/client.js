@@ -1,8 +1,9 @@
 Videos = new Meteor.Collection('videos');
 
-Template.player.videos = function() {
+Template.playlist.videos = function() {
 	return Videos.find({});
 }
+
 
 $.getParam = function(url, name) {
 	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
@@ -17,6 +18,7 @@ Template.player.current_video = function() {
 	if(videos.length == 0) return false;
 	return videos[0].key;
 }
+
 Template.player.events({
 	'click input#play': function() {
 		//console.log(Template.player.current_video);
