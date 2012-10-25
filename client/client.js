@@ -19,7 +19,7 @@ Template.player.current_video = function() {
 	return videos[0].key;
 }
 
-Template.player.events({
+Template.playlist.events({
 	'click input#play': function() {
 		//console.log(Template.player.current_video);
 		var key = $.getParam($('input#url').val(), 'v');

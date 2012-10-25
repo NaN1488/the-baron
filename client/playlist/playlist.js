@@ -1,4 +1,4 @@
-Template.player.events({
+Template.playlist.events({
 	'click input#addMediaButton': function() {
 		if($("#addMedia").is(":visible"))
 			$("#addMedia").hide("slow");
