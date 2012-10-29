@@ -3,14 +3,21 @@
 </head>
 
 <body>
+  {{> viewer}}
   {{> player}}
 </body>
-
+<template name="viewer">
+   <h1>Comunity Radio</h1>
+  <div id="_player"></div>
+</template>
 <template name="player">
-  <h1>Comunity Radio</h1>
-	<!-- <div><h3>url: {{current_video}}</h3></div>-->
+  
+	url: {{current_video}}
 	{{#if current_video}}
-    <iframe width="560" height="315" src="http://www.youtube.com/embed/{{current_video}}?&autoplay=1" frameborder="0" allowfullscreen></iframe>
+  
+  {{load_viewer}}
+  {{load_video}}
+    <!-- <iframe  width="560" height="315" src="http://www.youtube.com/embed/{{current_video}}?&autoplay=1" frameborder="0" allowfullscreen></iframe>-->
   {{/if}}
   <br>
   <label for="url"> Pegar la URL de youtube 
