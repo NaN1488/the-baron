@@ -1,4 +1,5 @@
 Videos = new Meteor.Collection('videos');
+CurrentVideos = new Meteor.Collection('current_videos');
 
 Template.playlist.videos = function() {
 	return Videos.find({});
@@ -14,9 +15,37 @@ Template.player.current_video = function() {
 	var videos = Videos.find({
 		current: true
 	}).fetch();
-	console.log(videos);
 	if(videos.length == 0) return false;
+	
 	return videos[0].key;
+}
+//this function is called from the template in order to load the video for any client
+Template.player.load_video = function (){
+ 	if (_player != undefined){
+ 		_player.loadVideoById(Template.player.current_video());
+ 	}
+}
+
+Template.player.set_current_time = function (current_time){
+	CurrentVideos.update({channel:'default'}, {$set: {time:current_time} });
+}
+
+Meteor.setInterval(function(){
+	if (_player != undefined) {
+		Template.player.set_current_time(parseInt(_player.getCurrentTime())+4);
+	}
+}, 1000);
+
+Template.player.current_time = function () {
+	current_videos = CurrentVideos.find({channel:'default', video_id: Template.player.current_video()}).fetch();
+ 		time = 0;
+ 		if (current_videos.length == 1) {
+ 			time = current_videos[0].time
+ 		}else{
+ 			CurrentVideos.update({channel:'default'}, {$set: {'time':time, video_id: Template.player.current_video()} });
+ 			//CurrentVideos.find({channel:'default', video_id: Template.player.current_video()}).fetch();
+ 		}
+	return time;//CurrentVideos.find({channel:'default'}).fetch()[0].time;
 }
 
 Template.playlist.events({
@@ -50,13 +79,7 @@ Template.playlist.events({
 				current: true
 			});
 		}
-		//console.log(Template.player.current_video);
-		//Session.set('current_video', $('input#url').val());
-		// template data, if any, is available in 'this'
-		// console.log(this,"-------------", Template.player.current_video);
-		//Session.set('current_video', '2222');
-		// this.current_video = 'sssss';
-		//console.log(Template.player.current_video);
+		
 		if(typeof console !== 'undefined') console.log("You pressed the button play");
 	}
 });
