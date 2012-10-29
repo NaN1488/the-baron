@@ -1,9 +1,10 @@
 Videos = new Meteor.Collection('videos');
 CurrentVideos = new Meteor.Collection('current_videos');
 
-Template.player.videos = function() {
+Template.playlist.videos = function() {
 	return Videos.find({});
 }
+
 
 $.getParam = function(url, name) {
 	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
@@ -47,7 +48,7 @@ Template.player.current_time = function () {
 	return time;//CurrentVideos.find({channel:'default'}).fetch()[0].time;
 }
 
-Template.player.events({
+Template.playlist.events({
 	'click input#play': function() {
 		//console.log(Template.player.current_video);
 		var key = $.getParam($('input#url').val(), 'v');

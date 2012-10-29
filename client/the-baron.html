@@ -5,6 +5,7 @@
 <body>
   {{> viewer}}
   {{> player}}
+  {{> playlist}}
 </body>
 <template name="viewer">
    <h1>Comunity Radio</h1>
@@ -19,14 +20,46 @@
   {{load_video}}
     <!-- <iframe  width="560" height="315" src="http://www.youtube.com/embed/{{current_video}}?&autoplay=1" frameborder="0" allowfullscreen></iframe>-->
   {{/if}}
-  <br>
-  <label for="url"> Pegar la URL de youtube 
-    <input  id="url" type="text" name="url" placeholder="url de youtube">
-  </label>
-  <input id="play" type="button" value="play" />
-  <ul>
+</template>
+
+
+<template name="playlist">
+  <!-- Starting the Playlist -->
+  <h1>Playlist</h1>
+  <table>
+    <tr>
+      <td>
+        <input type="button" value="Add Media" id="addMediaButton"/>
+      </td>
+      <td>
+        <div id="addMedia" style="display: none;">
+          <label for="url"> Pegar la URL de youtube 
+            <input  id="url" type="text" name="url" placeholder="url de youtube">
+          </label>
+          <input id="play" type="button" value="Add" />
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+        <td>
+          <table>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>User</th>
+              <th>Rating</th>
+              <th>Stars</th>
+            </tr>
     {{#each videos}}
-      <li>{{this.key}} {{#if this.current}}<strong>Playing</strong>{{/if}}</li>
+            <tr>
+              <td>{{#if this.current}}<strong>Playing</strong>{{/if}}</td>
+              <td>{{this.key}}</td>
+              <td>guidoalloatti</td>
+              <td><input type="button" value="4.6"/></td>
+              <td><img src="starts.png"></td>
+            </tr>
     {{/each}}
-  </ul>
+</table>
 </template>
