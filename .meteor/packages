@@ -7,3 +7,5 @@ autopublish
 preserve-inputs
 insecure
 bootstrap
+accounts-password
+accounts-ui

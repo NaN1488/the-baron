@@ -3,8 +3,13 @@
 </head>
 
 <body>
-  {{> player}}
-  {{> playlist}}
+  <div class='container'>
+    <div style='float:right'>
+      {{loginButtons align="right"}}
+    </div>
+    {{> player}}
+    {{> playlist}}
+  </div>
 </body>
 
 <template name="player">
