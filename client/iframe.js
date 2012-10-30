@@ -19,10 +19,10 @@ if (Meteor.isClient){
       // after the API code downloads.
     function onYouTubeIframeAPIReady() {
       _player = new YT.Player('_player', {
-        playerVars:{autoplay: 1, start: Template.player.current_time()},
+        playerVars:{autoplay: 1, start: Controller.current_time()},
         height: '390',
         width: '640',
-        videoId: Template.player.current_video(),
+        videoId: Controller.current_video(),
         events: {
           'onReady': onPlayerReady,
           'onStateChange': onPlayerStateChange
@@ -32,19 +32,14 @@ if (Meteor.isClient){
     // The API will call this function when the video player is ready.
     function onPlayerReady(event) {
       event.target.playVideo();
+
     }
 
     // The API calls this function when the player's state changes.
-    // The function indicates that when playing a video (state=1),
-    // the player should play for six seconds and then stop.
-    var done = false;
+    // The function indicates that when playing a video (state=1)
     function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 6000);
-        done = true;
-      }
-      if (event.data == YT.PlayerState.CUED){
-         event.target.playVideo();
+      if (event.data == YT.PlayerState.PLAYING) {
+        Controller.update_duration();
       }
     }
     function stopVideo() {
