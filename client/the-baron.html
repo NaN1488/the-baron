@@ -1,9 +1,11 @@
 <head>
-  <title>public_music</title>
+  <title>The Baron APP</title>
 </head>
 
 <body>
+
   <div class='container'>
+    <img src="monocle.svg" style='float:left' title="we need a real logo"/>
     <div style='float:right'>
       {{loginButtons align="right"}}
     </div>
@@ -13,12 +15,10 @@
   </div>
 </body>
 <template name="viewer">
-   <h1>Comunity Radio</h1>
+   <h1>The Baron APP</h1>
   <div id="_player"></div>
 </template>
 <template name="player">
-  
-	url: {{current_video}}
 	{{#if current_video}}
   
   {{load_viewer}}
