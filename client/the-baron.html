@@ -11,7 +11,10 @@
     </div>
       {{> viewer}}
       {{> player}}
-      {{> playlist}}
+      <hr/>
+      <div style="float: left;">
+        {{> playlist}}
+      </div>
       <div style="float: right;">
         {{> entry}}
         {{> clean}}
@@ -83,7 +86,7 @@
 </template>
 
 <template name="clean">
-  <p><input type="button" id="cleanChat" value="Clean Chat"></p>
+  <input type="button" id="cleanChat" value="Clean Chat">
 </template>
 
 <template name="messages">
