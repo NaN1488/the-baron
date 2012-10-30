@@ -9,9 +9,14 @@
     <div style='float:right'>
       {{loginButtons align="right"}}
     </div>
-    {{> viewer}}
-    {{> player}}
-    {{> playlist}}
+      {{> viewer}}
+      {{> player}}
+      {{> playlist}}
+      <div style="float: right;">
+        {{> entry}}
+        {{> clean}}
+        {{> messages}}
+    </div>
   </div>
 </body>
 <template name="viewer">
@@ -67,4 +72,26 @@
             </tr>
     {{/each}}
 </table>
+</template>
+
+
+<template name="entry">
+  <p>
+    <input type="text" id="name" placeholder="Your Name"> 
+    <input type="text" id="messageBox" placeholder="Your Message">    
+  </p>  
+</template>
+
+<template name="clean">
+  <p><input type="button" id="cleanChat" value="Clean Chat"></p>
+</template>
+
+<template name="messages">
+  {{#each messages}}
+     {{> message}}
+  {{/each}}
+</template>
+
+<template name="message">
+  <p>{{hours}}:{{minutes}}<strong> - {{name}}:</strong> {{message}}</p>
 </template>
