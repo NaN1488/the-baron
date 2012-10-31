@@ -38,6 +38,13 @@ Template.playlist.events({
 	  }
 });
 
+Template.entry.user_logged_in = function(){
+	if(Meteor.user() !== null){
+		return true;
+	} else {
+		return false;
+	}
+}
 
 /**
 * Adding the Chat JS
@@ -69,7 +76,7 @@ Template.entry.events = {};
 
 Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
     ok: function(text, event) {
-      var nameEntry = document.getElementById('name');
+      var nameEntry = Meteor.user().emails[0].address;
       
       if(nameEntry.value != "") {
         
@@ -83,7 +90,7 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
         }
 
         var messageID = Messages.insert({
-          name: nameEntry.value, 
+          name: nameEntry, 
           message: text, 
           time: ts, 
           hours: hours,
