@@ -69,7 +69,10 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
         var dateTime = new Date();
         var minutes = dateTime.getMinutes();
         var hours = dateTime.getHours();
-        
+
+        if(minutes < 10) {
+        	minutes = "0"+minutes;
+        }
 
         var messageID = Messages.insert({
           name: nameEntry.value, 
@@ -80,9 +83,9 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
         });
         event.target.value = "";
 
+       /*
        console.log("===== NEW ENTRY ======");
        console.log(Messages);
-       /*
        console.log("MESSAGE ID: " + messageID);
        console.log("YOUR NAME: " + nameEntry.value);
        console.log("YOUR MESSAGE: " + text);
@@ -90,6 +93,7 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
        console.log("YOUR HOUR: " + hours);
        console.log("YOUR MINUTES: " + minutes);
        */
+
       }
     }
   });
