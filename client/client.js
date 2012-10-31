@@ -14,20 +14,28 @@ Template.player.load_video = function (){
  	Controller.load_video();
 }
 
-Template.playlist.events({
-  'click input#play': function() {
-    var key = $('#url').val();
-    if (key !==''){
-      //set current false for all videos
-      Videos.update({current: true}, {$set: {current: false}}, false, true);
+Template.playlist.events({	
+	'click input#play': function() {
+	    var key = $('#url').val();
+	    if (key !==''){
 
-      if (Videos.find({'key': key}).count() > 0) {
-        Videos.update({'key': key}, {$set: {current: true}}, false, true);
-      } else {
-        Videos.insert({'key': key, current: true});
+      var dateTime = new Date();
+      var minutes = dateTime.getMinutes();
+      var hours = dateTime.getHours();
+
+      if(minutes < 10) {
+       minutes = "0"+minutes;
       }
-    }
-  }
+	      //set current false for all videos
+	      Videos.update({current: true}, {$set: {current: false}}, false, true);
+
+	      if (Videos.find({'key': key}).count() > 0) {
+	        Videos.update({'key': key}, {$set: {current: true}}, false, true);
+	      } else {
+	        Videos.insert({'key': key, current: true, minutes: minutes, hours: hours});
+	     }
+	    }
+	  }
 });
 
 
@@ -101,6 +109,12 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
   Template.clean.events({
     'click input#cleanChat': function() {
       Messages.remove({});
+    }
+  });
+
+  Template.playlist.events({
+    'click input#emptyPlaylist': function() {
+      Videos.remove({});
     }
   });
 

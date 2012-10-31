@@ -17,7 +17,6 @@
       </div>
       <div style="float: right;">
         {{> entry}}
-        {{> clean}}
         {{> messages}}
     </div>
   </div>
@@ -38,11 +37,13 @@
 
 <template name="playlist">
   <!-- Starting the Playlist -->
-  <h1>Playlist</h1>
+  <p style="font-family: Arial, Helvetica, sans-serif; font-weight: strong; color: #3F3F3F; font-size: 2em;">Playlist
+  </p>Channel Admin can: <input type="button" value="Empty Playlist" id="emptyPlaylist" />
+
   <table>
     <tr>
       <td>
-        <input  id="url" type="text" name="url" style="width: 500px">
+        <input id="url" type="text" name="url" style="width: 500px">
       </td>
       <td>
         <div id="addMedia" style="display: none;">
@@ -54,31 +55,45 @@
       </td>
     </tr>
   </table>
-  <table>
+
+  {{#if videos.count}}
+    <table class="playlist_table">
     <tr>
         <td>
           <table>
             <tr>
               <th></th>
+              <th>Played at</th>
               <th>Title</th>
               <th>User</th>
               <th>Rating</th>
               <th>Stars</th>
+              <th>Del</th>
             </tr>
     {{#each videos}}
             <tr>
               <td>{{#if this.current}}<strong>Playing</strong>{{/if}}</td>
+              <td>{{this.hours}}:{{this.minutes}}</td>
               <td>{{this.key}}</td>
-              <td>guidoalloatti</td>
+              <td>username</td>
               <td><input type="button" value="4.6"/></td>
               <td><img src="starts.png"></td>
+              <td>-</td>
             </tr>
     {{/each}}
-</table>
+  </table>
+{{else}}
+  <div>There is nothing yet to show!</div>
+{{/if}}
+
+
 </template>
 
 
 <template name="entry">
+    <p style="font-family: Arial, Helvetica, sans-serif; font-weight: strong; color: #3F3F3F; font-size: 2em;">Chat
+  </p>
+    {{> clean}}
    <p>
     <input type="text" id="name" placeholder="Your Name"> 
     <input type="text" id="messageBox" placeholder="Your Message">    
@@ -86,7 +101,7 @@
 </template>
 
 <template name="clean">
-  <input type="button" id="cleanChat" value="Clean Chat">
+  Channel Admin can: <input type="button" id="cleanChat" value="Empty Chat">
 </template>
 
 <template name="messages">

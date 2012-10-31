@@ -2,6 +2,20 @@
 input#messageBox {
 	width: 400px;
 }
+
+.playlist_table {
+  display: block;
+  height: 200px;
+  overflow-y: scroll;
+} }
+
+.custom_header {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #3F3F3F;
+	font-size: 2em;
+}
+
 .movie-result td {vertical-align: top }
 .movie-image { width: 60px; }
 .movie-image img { height: 80px; width: 60px;  }
