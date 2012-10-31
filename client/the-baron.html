@@ -1,28 +1,50 @@
 <head>
-  <title>The Baron APP</title>
+  <title>Video Baron</title>
 </head>
 
 <body>
 
   <div class='container'>
-    <img src="monocle.svg" style='float:left' title="we need a real logo"/>
-    <div style='float:right'>
-      {{loginButtons align="right"}}
-    </div>
-      {{> viewer}}
-      {{> player}}
-      <hr/>
-      <div style="float: left;">
-        {{> playlist}}
+    <div class="row">
+
+      <div class="span12 clearfix">
+
+        <div class="pull-left">
+           <h1 class="pull-right">Video Baron</h1>
+        </div><!--/Logo -->
+
+        <div class="pull-right">
+          {{loginButtons align="right"}}
+        </div><!--/LoginButtons Container -->
       </div>
-      <div style="float: right;">
+
+    </div><!--/row -->
+
+    <div class="row">
+
+      <div class="span7">
+        {{> viewer}}
+        {{> player}} 
+      </div><!--/Player Viewer-->
+
+      <div class="span5">
+        {{> playlist}}
+      </div><!--/Playlist -->
+
+    </div><!--/Row -->
+
+    <div class="row">
+
+      <div class="span12">
         {{> entry}}
         {{> messages}}
-    </div>
-  </div>
+      </div><!--/Chat -->
+
+    </div><!--/Row -->
+
+  </div><!--/Container -->
 </body>
 <template name="viewer">
-   <h1>The Baron APP</h1>
   <div id="_player"></div>
 </template>
 <template name="player">
