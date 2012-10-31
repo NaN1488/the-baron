@@ -42,14 +42,14 @@
   <table>
     <tr>
       <td>
-        <input type="button" value="Add Media" id="addMediaButton"/>
+        <input  id="url" type="text" name="url" style="width: 500px">
       </td>
       <td>
         <div id="addMedia" style="display: none;">
           <label for="url"> Pegar la URL de youtube 
-            <input  id="url" type="text" name="url" placeholder="url de youtube">
+            
           </label>
-          <input id="play" type="button" value="Add" />
+          <input id="play" type="button" value="Add" class="hidden"/>
         </div>
       </td>
     </tr>
@@ -79,7 +79,7 @@
 
 
 <template name="entry">
-  <p>
+   <p>
     <input type="text" id="name" placeholder="Your Name"> 
     <input type="text" id="messageBox" placeholder="Your Message">    
   </p>  

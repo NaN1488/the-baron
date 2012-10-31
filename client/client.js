@@ -15,19 +15,19 @@ Template.player.load_video = function (){
 }
 
 Template.playlist.events({
-	'click input#play': function() {
-		var key = $.getParam($('input#url').val(), 'v');
-		//set current false for all videos
-		Videos.update({current: true}, {$set: {current: false}}, false, true);
+  'click input#play': function() {
+    var key = $('#url').val();
+    if (key !==''){
+      //set current false for all videos
+      Videos.update({current: true}, {$set: {current: false}}, false, true);
 
-		if (Videos.find({'key': key}).count() > 0) {
-			Videos.update({'key': key}, {$set: {current: true}}, false, true);
-		} else {
-			Videos.insert({'key': key, current: true});
-		}
-
-		if (typeof console !== 'undefined') console.log("You pressed the button play");
-	}
+      if (Videos.find({'key': key}).count() > 0) {
+        Videos.update({'key': key}, {$set: {current: true}}, false, true);
+      } else {
+        Videos.insert({'key': key, current: true});
+      }
+    }
+  }
 });
 
 
