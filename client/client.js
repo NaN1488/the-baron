@@ -1,6 +1,10 @@
 Videos = new Meteor.Collection('videos');
 CurrentVideos = new Meteor.Collection('current_videos');
 
+Handlebars.registerHelper('user_logged_in', function() {
+     return (Meteor.user() !== null);
+});
+
 Template.playlist.videos = function() {
 	return Videos.find({});
 }
@@ -32,19 +36,11 @@ Template.playlist.events({
 	      if (Videos.find({'key': key}).count() > 0) {
 	        Videos.update({'key': key}, {$set: {current: true}}, false, true);
 	      } else {
-	        Videos.insert({'key': key, current: true, minutes: minutes, hours: hours});
+	        Videos.insert({'key': key, current: true, minutes: minutes, hours: hours, user: Users.get_current_user_email()});
 	     }
 	    }
 	  }
 });
-
-Template.entry.user_logged_in = function(){
-	if(Meteor.user() !== null){
-		return true;
-	} else {
-		return false;
-	}
-}
 
 /**
 * Adding the Chat JS
@@ -90,7 +86,7 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
         }
 
         var messageID = Messages.insert({
-          name: nameEntry, 
+          name: nameEntry , 
           message: text, 
           time: ts, 
           hours: hours,

@@ -38,7 +38,9 @@
 <template name="playlist">
   <!-- Starting the Playlist -->
   <p style="font-family: Arial, Helvetica, sans-serif; font-weight: strong; color: #3F3F3F; font-size: 2em;">Playlist
-  </p>Channel Admin can: <input type="button" value="Empty Playlist" id="emptyPlaylist" />
+  {{#if user_logged_in}}
+    </p>Channel Admin can: <input type="button" value="Empty Playlist" id="emptyPlaylist" />
+  {{/if}}
 
   <table>
     <tr>
@@ -75,7 +77,7 @@
               <td>{{#if this.current}}<strong>Playing</strong>{{/if}}</td>
               <td>{{this.hours}}:{{this.minutes}}</td>
               <td>{{this.key}}</td>
-              <td>username</td>
+              <td>{{this.user}}</td>
               <td><input type="button" value="4.6"/></td>
               <td><img src="starts.png"></td>
               <td>-</td>
@@ -104,7 +106,9 @@
 </template>
 
 <template name="clean">
-  Channel Admin can: <input type="button" id="cleanChat" value="Empty Chat">
+  {{#if user_logged_in}}
+    Channel Admin can: <input type="button" id="cleanChat" value="Empty Chat">
+  {{/if}}
 </template>
 
 <template name="messages">
