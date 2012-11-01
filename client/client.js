@@ -36,7 +36,7 @@ Template.playlist.events({
 	      if (Videos.find({'key': key}).count() > 0) {
 	        Videos.update({'key': key}, {$set: {current: true}}, false, true);
 	      } else {
-	        Videos.insert({'key': key, current: true, minutes: minutes, hours: hours, user: Users.get_current_user_email()});
+	        Videos.insert({'key': key, current: true, minutes: minutes, hours: hours, user: Users.get_current_user()});
 	     }
 	    }
 	  }
@@ -72,7 +72,7 @@ Template.entry.events = {};
 
 Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
     ok: function(text, event) {
-      var nameEntry = Users.get_current_user_email();
+      var nameEntry = Users.get_current_user();
       
       if(nameEntry.value != "") {
         
