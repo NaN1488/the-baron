@@ -77,53 +77,45 @@ Template.entry.events = {};
 Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
     ok: function(text, event) {
       var nameEntry = Meteor.user().emails[0].address;
-      
       if(nameEntry.value != "") {
-        
-        var ts = Date.now() / 1000;
-        var dateTime = new Date();
-        var minutes = dateTime.getMinutes();
-        var hours = dateTime.getHours();
-
-        if(minutes < 10) {
-        	minutes = "0"+minutes;
-        }
-
-        var messageID = Messages.insert({
-          name: nameEntry, 
-          message: text, 
-          time: ts, 
-          hours: hours,
-          minutes: minutes
-        });
-        event.target.value = "";
-
-       /*
-       console.log("===== NEW ENTRY ======");
-       console.log(Messages);
-       console.log("MESSAGE ID: " + messageID);
-       console.log("YOUR NAME: " + nameEntry.value);
-       console.log("YOUR MESSAGE: " + text);
-       console.log("YOUR TIMESTAMP: " + ts);
-       console.log("YOUR HOUR: " + hours);
-       console.log("YOUR MINUTES: " + minutes);
-       */
-
+        Meteor.call('getTime', function (error, result) { 
+          var hour = result.time;
+          var ts = result.timestamp;
+          var messageID = Messages.insert({
+           name: nameEntry, 
+           message: text, 
+           time: ts, 
+           hour: hour
+          });
+          event.target.value = "";
+         } );
       }
     }
   });
 
   Template.clean.events({
     'click input#cleanChat': function() {
-      Messages.remove({});
+      //TODO: check user is admin
+      var reply = prompt("Hey there, stop messing around, give us the passphrase or leave!", "");
+      if(reply == "tategay") Messages.remove({});
     }
   });
 
   Template.playlist.events({
     'click input#emptyPlaylist': function() {
-      Videos.remove({});
+      var reply = prompt("Hey there, stop messing around, give us the passphrase or leave!", "");
+      //TODO: check user is admin
+      if(reply == "tategay") Videos.remove({});
     }
   });
+
+    Template.playlist.events({
+    'click input#deleteSong': function() {
+      console.log(this);
+      Videos.remove({ key: (this).key });
+    }
+  });
+
 
   Template.messages.messages = function(){
     return Messages.find({}, { sort: {time: -1} });

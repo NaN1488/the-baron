@@ -15,7 +15,7 @@
       <div style="float: left;">
         {{> playlist}}
       </div>
-      <div style="float: right;">
+      <div style="float: right; width: 600px;">
         {{> entry}}
         {{> messages}}
     </div>
@@ -62,23 +62,29 @@
         <td>
           <table>
             <tr>
-              <th></th>
-              <th>Played at</th>
-              <th>Title</th>
-              <th>User</th>
+              <th>Status</th>
+              <th>When</th>
+              <th>What</th>
+              <th>Who</th>
               <th>Rating</th>
               <th>Stars</th>
-              <th>Del</th>
+              <th>Delete</th>
             </tr>
     {{#each videos}}
             <tr>
-              <td>{{#if this.current}}<strong>Playing</strong>{{/if}}</td>
-              <td>{{this.hours}}:{{this.minutes}}</td>
+              <td>{{#if this.current}}
+                <strong>Playing</strong>
+                {{else}}
+                  <a href="#">Replay</a>
+                {{/if}}
+              </td>
+              <td>{{this.hour}}</td>
               <td>{{this.key}}</td>
               <td>username</td>
               <td><input type="button" value="4.6"/></td>
               <td><img src="starts.png"></td>
-              <td>-</td>
+              <td><input type="button" value="Sucks" id="deleteSong" name="{{this.key}}"/></td>
+                <!-- <a href="#" onclick="removeSong({{this.key}});">Sucks!</a></td> -->
             </tr>
     {{/each}}
   </table>
@@ -114,5 +120,5 @@
 </template>
 
 <template name="message">
-  <p>{{hours}}:{{minutes}}<strong> - {{name}}</strong> says: {{message}}</p>
+  <p>{{hour}}<strong> - {{name}}</strong> says: {{message}}</p>
 </template>
