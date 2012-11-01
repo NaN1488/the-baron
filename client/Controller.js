@@ -1,7 +1,7 @@
 //controller
 Controller = {
 	_:{
-		defatul_channel:'default'
+		default_channel:'default'
 	},
 	/**
 	* send the duration of the current video
