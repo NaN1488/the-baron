@@ -1,44 +1,62 @@
 <head>
-  <title>The Baron APP</title>
+  <title>Video Baron</title>
 </head>
 
 <body>
 
   <div class='container'>
-    <img src="monocle.svg" style='float:left' title="we need a real logo"/>
-    <div style='float:right'>
-      {{loginButtons align="right"}}
-    </div>
-      {{> viewer}}
-      {{> player}}
-      <hr/>
-      <div style="float: left;">
-        {{> playlist}}
+    <div class="row">
+
+      <div class="span12 clearfix">
+
+        <div class="pull-left">
+           <h1 class="pull-right">Video Baron</h1>
+        </div><!--/Logo -->
+
+        <div class="pull-right">
+          {{loginButtons align="right"}}
+        </div><!--/LoginButtons Container -->
       </div>
-      <div style="float: right; width: 600px;">
+    </div><!--/row -->
+
+    <div class="row">
+
+      <div class="span7">
+        {{> viewer}}
+        {{> player}} 
+      </div><!--/Player Viewer-->
+
+      <div class="span5">
+        {{> playlist}}
+      </div><!--/Playlist -->
+
+    </div><!--/Row -->
+
+    <div class="row">
+      <div class="span12" >
         {{> entry}}
         {{> messages}}
-    </div>
-  </div>
+      </div><!--/Chat -->
+    </div><!--/Row -->
+  </div><!--/Container -->
 </body>
+
 <template name="viewer">
-   <h1>The Baron APP</h1>
   <div id="_player"></div>
 </template>
 <template name="player">
-	{{#if current_video}}
-  
-  {{load_viewer}}
-  {{load_video}}
-    <!-- <iframe  width="560" height="315" src="http://www.youtube.com/embed/{{current_video}}?&autoplay=1" frameborder="0" allowfullscreen></iframe>-->
+	{{#if current_video}}  
+    {{load_viewer}}
+    {{load_video}}
   {{/if}}
 </template>
-
 
 <template name="playlist">
   <!-- Starting the Playlist -->
   <p style="font-family: Arial, Helvetica, sans-serif; font-weight: strong; color: #3F3F3F; font-size: 2em;">Playlist
-  </p>Channel Admin can: <input type="button" value="Empty Playlist" id="emptyPlaylist" />
+  {{#if user_logged_in}}
+    </p>Channel Admin can: <input type="button" value="Empty Playlist" id="emptyPlaylist" />
+  {{/if}}
 
   <table>
     <tr>
@@ -66,33 +84,31 @@
               <th>When</th>
               <th>What</th>
               <th>Who</th>
-              <th>Rating</th>
               <th>Stars</th>
+              <th>Rating</th>
               <th>Delete</th>
             </tr>
     {{#each videos}}
             <tr>
-              <td>{{#if this.current}}
-                <strong>Playing</strong>
+              <td>
+                {{#if this.current}}
+                  <strong>Playing</strong>
                 {{else}}
-                  <a href="#">Replay</a>
+                  <input type="button" value="Replay" class="replaySong" />
                 {{/if}}
               </td>
               <td>{{this.hour}}</td>
               <td>{{this.key}}</td>
-              <td>username</td>
-              <td><input type="button" value="4.6"/></td>
+              <td>{{this.user}}</td>
               <td><img src="starts.png"></td>
-              <td><input type="button" value="Sucks" id="deleteSong" name="{{this.key}}"/></td>
-                <!-- <a href="#" onclick="removeSong({{this.key}});">Sucks!</a></td> -->
+              <td><input type="button" value="TBD"/></td>
+              <td><input type="button" value="Destroy!" class="deleteSong"/></td>
             </tr>
     {{/each}}
   </table>
 {{else}}
   <div>There is nothing yet to show!</div>
 {{/if}}
-
-
 </template>
 
 
@@ -110,7 +126,9 @@
 </template>
 
 <template name="clean">
-  Channel Admin can: <input type="button" id="cleanChat" value="Empty Chat">
+  {{#if user_logged_in}}
+    Channel Admin can: <input type="button" id="cleanChat" value="Empty Chat">
+  {{/if}}
 </template>
 
 <template name="messages">
