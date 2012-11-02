@@ -8,7 +8,7 @@ Handlebars.registerHelper('user_logged_in', function() {
 });
 
 Template.playlist.videos = function() {
-	return Videos.find({});
+	return Videos.find({},{ sort: {hour: -1} });
 }
 
 //return video_id

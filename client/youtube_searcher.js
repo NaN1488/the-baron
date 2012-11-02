@@ -39,7 +39,11 @@ Template.playlist.rendered = function(){
             dropdownCssClass: "bigdrop" // apply css that makes the dropdown taller
         });
    $('#url').change(function (){
-    $('#play').trigger('click');
+        if ($('#url').data('send') != video_selected.id){
+            $('#url').data('send',$(this).val());
+            $('#title').html(video_selected.title.$t);
+            $('#play').trigger('click');
+        }
    });
 }
 function formatVideoList (entry){
@@ -63,6 +67,9 @@ function formatVideoList (entry){
         markup += "</td></tr></table>";
         return markup;
 }
+
+var video_selected;
 function formatVideoSelection(entry){
+    video_selected=entry;
     return entry.title.$t;
 }
