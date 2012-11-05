@@ -3,43 +3,43 @@
 </head>
 
 <body>
-
   <div class='container'>
     <div class="row">
-
       <div class="span12 clearfix">
-
         <div class="pull-left">
            <h1 class="pull-right">Video Baron</h1>
         </div><!--/Logo -->
-
         <div class="pull-right">
           {{loginButtons align="right"}}
         </div><!--/LoginButtons Container -->
       </div>
     </div><!--/row -->
-
+<hr>
     <div class="row">
-
       <div class="span7">
         <h3 id="title"></h3>
         {{> viewer}}
         {{> player}} 
       </div><!--/Player Viewer-->
-
       <div class="span5">
         {{> playlist}}
       </div><!--/Playlist -->
-
     </div><!--/Row -->
-
+  <hr>
     <div class="row">
-      <div class="span12" >
+      <div class="span12">
         {{> entry}}
-        {{> messages}}
+        <div style="display: block; overflow-y: auto; width: 600px; height: 350px;">
+          {{> messages}}
+        </div>
       </div><!--/Chat -->
     </div><!--/Row -->
   </div><!--/Container -->
+  <div>
+      <hr>
+      Footer Here
+        <hr>
+  </div>
 </body>
 
 <template name="viewer">
@@ -84,7 +84,7 @@
               <th>Status</th>
               <th>Added@</th>
               <th>What are we listening?</th>
-              <th>Enlightener</th>
+              <th>Shared by</th>
               <!-- 
                 <th>Stars</th>
                 <th>Rating</th> 
@@ -123,9 +123,14 @@
   </p>
     {{> clean}}
     {{#if user_logged_in}}
-   <p>
-    <input type="text" id="messageBox" placeholder="Your Message">    
-  </p>
+   <div id="messagesInputDiv">
+    <table>
+      <tr>
+        <td><input type="text" id="messageBox" placeholder="Your Message"></td>
+        <td><input id="editingMessage" type="image" src="edit.jpg" alt="replay" height="26" width="26" style="display: none;"/></td>
+      </tr>
+    </table>
+  </div>
   {{else}}
     <p>Please log in to use the chat!</p>
   {{/if}}
@@ -144,5 +149,12 @@
 </template>
 
 <template name="message">
-  <p style="font-size: 10px;">{{formmatedDate}}<strong> - {{name}}</strong> says: {{message}}</p>
+  <p style="font-size: 10px;">
+    <input type="image" class="deleteChatLine" src="remove.jpg" alt="replay" height="16" width="16" />
+    <input type="image" class="editChatLine" src="edit.jpg" alt="replay" height="16" width="16" />
+    {{formmatedDate}}<strong> - {{name}}</strong> says: {{message}}
+    {{#if edited}}
+      <input type="image" src="edited.jpg" alt="edited" height="16" width="16" />
+    {{/if}}
+  </p>
 </template>

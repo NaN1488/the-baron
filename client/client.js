@@ -1,4 +1,17 @@
 /**
+ * Var Declarations
+ */
+var months = {};
+Videos = new Meteor.Collection('videos');
+CurrentVideos = new Meteor.Collection('current_videos');
+var editingChatLineId = "";
+var isLineUnderEdition = false;
+Messages = new Meteor.Collection('messages');
+Template.entry.events = {};
+var originalTs = 0;
+
+
+/**
  * function to calculate local time in a different city given the city's UTC offset
  */
 function calcTime(city, offset, utc) {
@@ -18,14 +31,10 @@ function calcTime(city, offset, utc) {
     return { city: city, time: nd.toLocaleString(), formmatedDate: month+day+"@" +hour};
 }
 
-var months = { }
+
 
 
 // TODO: Split JS templates events independently
-
-Videos = new Meteor.Collection('videos');
-CurrentVideos = new Meteor.Collection('current_videos');
-
 Handlebars.registerHelper('user_logged_in', function() {
      return (Meteor.user() !== null);
 });
@@ -85,7 +94,7 @@ Template.playlist.events({
 /**
 * Adding the Chat JS
 */
-Messages = new Meteor.Collection('messages1');
+
 
 var okcancel_events = function (selector) {
 	return 'keyup '+selector+', keydown'+selector+', focusout '+selector;
@@ -109,8 +118,6 @@ var make_okcancel_handler = function (options) {
     };
   };
 
-Template.entry.events = {};
-
 Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
     ok: function(text, event) {
       //var nameEntry = Meteor.user().emails[0].address;
@@ -120,32 +127,37 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
           var ts = result.timestamp;
           var utc = result.utc;
           var date = result.date;
-
           var locale = calcTime('Buenos Aires', '-3', utc);
           var location = locale.city;
           var localTime = locale.time;
           var formmatedDate = locale.formmatedDate;
 
-          var messageID = Messages.insert({
-           name:    nameEntry, 
-           message: text, 
-           time:    ts, 
-           city:    location,
-           utc:     localTime,
-           formmatedDate: formmatedDate,
-          });
+          if( !isLineUnderEdition ) {
+            Messages.insert({
+             name:    nameEntry, 
+             message: text, 
+             time:    ts, 
+             city:    location,
+             utc:     localTime,
+             formmatedDate: formmatedDate,
+             edited: false
+            });
+          } else {
+            Messages.update({ _id: editingChatLineId }, 
+                            { message: text,
+                              name:    nameEntry, 
+                              //time:    ts,
+                              time:    originalTs, 
+                              city:    location,
+                              utc:     localTime,
+                              formmatedDate: formmatedDate, 
+                              edited: true},
+                            { multi: false });
+            $("#editingMessage").css('display', 'none');
+            isLineUnderEdition = false;
+          }
           event.target.value = "";
-         } );
-       /*
-       console.log("===== NEW ENTRY ======");
-       console.log(Messages);
-       console.log("MESSAGE ID: " + messageID);
-       console.log("YOUR NAME: " + nameEntry.value);
-       console.log("YOUR MESSAGE: " + text);
-       console.log("YOUR TIMESTAMP: " + ts);
-       console.log("YOUR HOUR: " + hours);
-       console.log("YOUR MINUTES: " + minutes);
-       */
+         });
       }
     }
   });
@@ -168,7 +180,7 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
     }
   });
 
-    Template.playlist.events({
+  Template.playlist.events({
     'click input.deleteSong': function() {
       var reply = prompt("Hey you! You are about to remove a video, give us the passphrase or DIE!", "");
       //TODO: check user is admin
@@ -177,7 +189,31 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
     }
   });
 
-    Template.playlist.events({
+  Template.message.events({
+    'click input.deleteChatLine': function() {
+      var reply = prompt("Hey you! You are about to remove a chat line, give us the passphrase or your line will be there forever!", "");
+      //TODO: check user is admin
+      if(reply == "tategay") 
+        Messages.remove({ _id: (this)._id });
+    }
+  });
+
+  Template.message.events({
+    'click input.editChatLine': function() {
+      var reply = prompt("Hey you! You are about to edit a chat line, give us the passphrase or your will never change it", "");
+      //TODO: check user is admin
+      if(reply == "tategay") { 
+        $("#messageBox").val((this).message); 
+        $("#editingMessage").css('display', 'block');
+        editingChatLineId = (this)._id;
+        isLineUnderEdition = true;
+        console.log(this);
+        originalTs = (this).time;
+      }
+    }
+  });
+
+  Template.playlist.events({
     'click input.replaySong': function() {
       var reply = prompt("Hey you! You are about to make us all hear the same song again, it must be GOOD! So give us the passphrase or run!", "");
       //TODO: check user is admin

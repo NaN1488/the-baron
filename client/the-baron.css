@@ -6,8 +6,8 @@ input#messageBox {
 .playlist_table {
   font-size: 10px;
   display: block;
-  height: 400px;
-  overflow-y: scroll;
+  height: 300px;
+  overflow-y: auto;
 } }
 
 .custom_header {
