@@ -127,12 +127,18 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
           var ts = result.timestamp;
           var utc = result.utc;
           var date = result.date;
-          var locale = calcTime('Buenos Aires', '-3', utc);
+          
+          if(window.location.hostname == "localhost") offset = -3;
+          else offset = 0;
+
+          var locale = calcTime('Buenos Aires', offset, utc);
           var location = locale.city;
           var localTime = locale.time;
           var formmatedDate = locale.formmatedDate;
 
           if( !isLineUnderEdition ) {
+
+
             Messages.insert({
              name:    nameEntry, 
              message: text, 
@@ -207,7 +213,6 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
         $("#editingMessage").css('display', 'block');
         editingChatLineId = (this)._id;
         isLineUnderEdition = true;
-        console.log(this);
         originalTs = (this).time;
       }
     }
