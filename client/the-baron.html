@@ -22,7 +22,7 @@
     <div class="row">
 
       <div class="span7">
-        <h2 id="title"></h2>
+        <h3 id="title"></h3>
         {{> viewer}}
         {{> player}} 
       </div><!--/Player Viewer-->
@@ -82,11 +82,13 @@
           <table>
             <tr>
               <th>Status</th>
-              <th>When</th>
-              <th>What</th>
-              <th>Who</th>
-              <th>Stars</th>
-              <th>Rating</th>
+              <th>When was it added?</th>
+              <th>What are we listening?</th>
+              <th>Who enlightened us?</th>
+              <!-- 
+                <th>Stars</th>
+                <th>Rating</th> 
+              -->
               <th>Delete</th>
             </tr>
     {{#each videos}}
@@ -95,15 +97,18 @@
                 {{#if this.current}}
                   <strong>Playing</strong>
                 {{else}}
-                  <input type="button" value="Replay" class="replaySong" />
+                  <input type="image" class="replaySong" src="replay.jpg" alt="replay" height="16" width="16" />
                 {{/if}}
               </td>
               <td>{{this.hour}}</td>
-              <td>{{this.key}}</td>
+              <td>{{this.title}}</td>
               <td>{{this.user}}</td>
-              <td><img src="starts.png"></td>
-              <td><input type="button" value="TBD"/></td>
-              <td><input type="button" value="Destroy!" class="deleteSong"/></td>
+              <!-- 
+                <td><img src="starts.png"></td>
+                <td><input type="button" value="TBD"/></td> 
+              -->
+              <td><input type="image" class="deleteSong" src="remove.jpg" alt="replay" height="16" width="16" />
+              </td>
             </tr>
     {{/each}}
   </table>
@@ -139,5 +144,5 @@
 </template>
 
 <template name="message">
-  <p>{{hour}}<strong> - {{name}}</strong> says: {{message}}</p>
+  <p style="font-size: 10px;">{{formmatedDate}}<strong> - {{name}}</strong> says: {{message}}</p>
 </template>

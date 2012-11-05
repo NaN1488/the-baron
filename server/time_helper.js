@@ -1,12 +1,9 @@
 function getTime() {
-	var dateTime = new Date();
-  var minutes = dateTime.getMinutes();
-  var hours = dateTime.getHours();
-  
-  if(minutes < 10) 
-    minutes = "0"+minutes;
-  
-  return {time: hours+":"+minutes, timestamp: (Date.now() / 1000)};
+  var date = new Date();
+  var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+  return {  date: date, 
+            utc: utc, 
+            timestamp: (Date.now() / 1000)};
 }
 
 /**

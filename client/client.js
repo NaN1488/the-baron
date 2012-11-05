@@ -1,3 +1,26 @@
+/**
+ * function to calculate local time in a different city given the city's UTC offset
+ */
+function calcTime(city, offset, utc) {
+    // convert to msec, add local time zone offset, get UTC time in msec
+    //utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+    
+    // create new Date object for different city, using supplied offset
+    nd = new Date(utc + (3600000*offset));
+
+    var localTime = nd.toLocaleString()
+    var day = localTime.substr(8,2);
+    var month = localTime.substr(4,3);
+    var year = localTime.substr(13,2);
+    var hour = localTime.substr(16,8);
+
+    // return time as a string
+    return { city: city, time: nd.toLocaleString(), formmatedDate: day+" "+month+"@" +hour};
+}
+
+var months = { }
+
+
 // TODO: Split JS templates events independently
 
 Videos = new Meteor.Collection('videos');
@@ -27,14 +50,26 @@ function playVideo(key) {
   console.log("KEY: " + key);
   if (key !==''){
     Meteor.call('getTime', function (error, result) { 
-      var hour = result.time;
+      
       var ts = result.timestamp;
+      var utc = result.utc;
+      var date = result.date;
+
+      var locale = calcTime('Buenos Aires', '-3', utc);
+      var location = locale.city;
+      var localTime = locale.time;
+      var hour = locale.formmatedDate;
+
        //set current false for all videos
        Videos.update({current: true}, {$set: {current: false}}, false, true);
        if (Videos.find({'key': key}).count() > 0) {
          Videos.update({'key': key}, {$set: {current: true}}, false, true);
        } else {
-         Videos.insert({'key': key, current: true, hour: hour, user: Users.get_current_user()});
+         Videos.insert({ key: key, 
+                         title: video_selected.title.$t,
+                         current: true, 
+                         hour: hour, 
+                         user: Users.get_current_user()});
        }
     });
   }
@@ -55,6 +90,7 @@ Messages = new Meteor.Collection('messages1');
 var okcancel_events = function (selector) {
 	return 'keyup '+selector+', keydown'+selector+', focusout '+selector;
 };
+
 
 var make_okcancel_handler = function (options) {
     var ok = options.ok || function(){};
@@ -81,13 +117,22 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
       var nameEntry = Users.get_current_user();
       if(nameEntry.value != "") {
         Meteor.call('getTime', function (error, result) { 
-          var hour = result.time;
           var ts = result.timestamp;
+          var utc = result.utc;
+          var date = result.date;
+
+          var locale = calcTime('Buenos Aires', '-3', utc);
+          var location = locale.city;
+          var localTime = locale.time;
+          var formmatedDate = locale.formmatedDate;
+
           var messageID = Messages.insert({
-           name: nameEntry, 
+           name:    nameEntry, 
            message: text, 
-           time: ts, 
-           hour: hour
+           time:    ts, 
+           city:    location,
+           utc:     localTime,
+           formmatedDate: formmatedDate,
           });
           event.target.value = "";
          } );
