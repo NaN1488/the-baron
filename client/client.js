@@ -15,7 +15,7 @@ function calcTime(city, offset, utc) {
     var hour = localTime.substr(16,8);
 
     // return time as a string
-    return { city: city, time: nd.toLocaleString(), formmatedDate: day+" "+month+"@" +hour};
+    return { city: city, time: nd.toLocaleString(), formmatedDate: month+day+"@" +hour};
 }
 
 var months = { }
