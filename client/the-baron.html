@@ -92,7 +92,11 @@
               <th>Delete</th>
             </tr>
     {{#each videos}}
-            <tr>
+            {{#if this.current}}
+              <tr bgcolor="#CED8F6">
+            {{else}}
+              <tr>
+            {{/if}} 
               <td>
                 {{#if this.current}}
                   <strong>Playing</strong>

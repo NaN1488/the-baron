@@ -64,7 +64,10 @@ function playVideo(key) {
       var utc = result.utc;
       var date = result.date;
 
-      var locale = calcTime('Buenos Aires', '-3', utc);
+      if(window.location.hostname == "localhost") offset = -3;
+      else offset = 0;
+
+      var locale = calcTime('Buenos Aires', offset, utc);
       var location = locale.city;
       var localTime = locale.time;
       var hour = locale.formmatedDate;
