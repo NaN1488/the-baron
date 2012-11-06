@@ -1,5 +1,7 @@
 Videos = new Meteor.Collection('videos');
 Messages = new Meteor.Collection('messages');
+Rates = new Meteor.Collection('rates');
+
 Meteor.startup(function() {
 
   if(Videos.find().count() === 0) {

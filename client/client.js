@@ -7,6 +7,7 @@ CurrentVideos = new Meteor.Collection('current_videos');
 var editingChatLineId = "";
 var isLineUnderEdition = false;
 Messages = new Meteor.Collection('messages');
+Rates = new Meteor.Collection('rates');
 Template.entry.events = {};
 var originalTs = 0;
 
@@ -196,3 +197,4 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
   Template.messages.messages = function(){
     return Messages.find({}, { sort: {time: -1} });
   }
+
