@@ -45,20 +45,13 @@ input#messageBox {
 [5. Playlist / #playlist] 
 */
 
-.playlist_table {
-  overflow-y: auto;
-  /* Temporal solution to width problem */
-  height: 300px;
-  font-size: 10px;
-  display: block;
-
-}
 .select2-container{
-	width: 488px;
+	width: 470px;
 }
 
 /* ------------------------------------------------------------------
 [6. Extra] 
+ style="display: block; overflow-y: auto; width: 600px; height: 350px;"
 */
 .movie-result td {vertical-align: top }
 .movie-image { width: 60px; }

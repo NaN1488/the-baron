@@ -14,7 +14,7 @@
         </div><!--/LoginButtons Container -->
       </div>
     </div><!--/row -->
-<hr>
+
     <div class="row">
       <div class="span7">
         <h3 id="title"></h3>
@@ -25,106 +25,25 @@
         {{> playlist}}
       </div><!--/Playlist -->
     </div><!--/Row -->
-  <hr>
+
     <div class="row">
-      <div class="span12">
+      <div class="span7">
         {{> entry}}
         <div style="display: block; overflow-y: auto; width: 600px; height: 350px;">
           {{> messages}}
         </div>
       </div><!--/Chat -->
+      <div class="span5">
+        
+      </div><!--/Top (?) -->
     </div><!--/Row -->
   </div><!--/Container -->
-  <div>
-      <hr>
-      Footer Here
-        <hr>
-  </div>
 </body>
 
-<template name="viewer">
-  <div id="_player"></div>
-</template>
-<template name="player">
-	{{#if current_video}}  
-    {{load_viewer}}
-    {{load_video}}
-  {{/if}}
-</template>
-
-<template name="playlist">
-  <!-- Starting the Playlist -->
-  <p style="font-family: Arial, Helvetica, sans-serif; font-weight: strong; color: #3F3F3F; font-size: 2em;">Playlist
-  {{#if user_logged_in}}
-    </p>Channel Admin can: <input type="button" value="Empty Playlist" id="emptyPlaylist" />
-  {{/if}}
-
-  <table>
-    <tr>
-      <td>
-        <input id="url" type="text" name="url" style="width: 500px">
-      </td>
-      <td>
-        <div id="addMedia" style="display: none;">
-          <label for="url"> Pegar la URL de youtube 
-            
-          </label>
-          <input id="play" type="button" value="Add" class="hidden"/>
-        </div>
-      </td>
-    </tr>
-  </table>
-
-  {{#if videos.count}}
-    <table class="playlist_table">
-    <tr>
-        <td>
-          <table>
-            <tr>
-              <th>Status</th>
-              <th>Added@</th>
-              <th>What are we listening?</th>
-              <th>Shared by</th>
-              <!-- 
-                <th>Stars</th>
-                <th>Rating</th> 
-              -->
-              <th>Delete</th>
-            </tr>
-    {{#each videos}}
-            {{#if this.current}}
-              <tr bgcolor="#CED8F6">
-            {{else}}
-              <tr>
-            {{/if}} 
-              <td>
-                {{#if this.current}}
-                  <strong>Playing</strong>
-                {{else}}
-                  <input type="image" class="replaySong" src="replay.jpg" alt="replay" height="16" width="16" />
-                {{/if}}
-              </td>
-              <td>{{this.hour}}</td>
-              <td>{{this.title}}</td>
-              <td>{{this.user}}</td>
-              <!-- 
-                <td><img src="starts.png"></td>
-                <td><input type="button" value="TBD"/></td> 
-              -->
-              <td><input type="image" class="deleteSong" src="remove.jpg" alt="replay" height="16" width="16" />
-              </td>
-            </tr>
-    {{/each}}
-  </table>
-{{else}}
-  <div>There is nothing yet to show!</div>
-{{/if}}
-</template>
-
-
+<!-- Chat
+    ================================================== -->
 <template name="entry">
-    <p style="font-family: Arial, Helvetica, sans-serif; font-weight: strong; color: #3F3F3F; font-size: 2em;">Chat
-  </p>
+    <h3>Chat</h3>
     {{> clean}}
     {{#if user_logged_in}}
    <div id="messagesInputDiv">
@@ -136,7 +55,9 @@
     </table>
   </div>
   {{else}}
-    <p>Please log in to use the chat!</p>
+    <div class="alert alert-info">
+      Please log in to use the chat!
+    </div>
   {{/if}}
 </template>
 

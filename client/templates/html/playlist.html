@@ -1,0 +1,83 @@
+<!-- Playlist
+    ================================================== -->
+<template name="playlist">
+  <h3>Playlist</h3>
+  {{#if user_logged_in}}
+    <p>
+      Channel Admin can: <input type="button" value="Empty Playlist" id="emptyPlaylist" />
+    </p>
+  {{/if}}
+
+  <!-- Playlist Searchbox -->
+  
+  <table>
+    <tr>
+      <td>
+        <input id="url" type="text" name="url">
+      </td>
+      <td>
+        <div id="addMedia" style="display: none;">
+          <label for="url"> Pegar la URL de youtube 
+            
+          </label>
+          <input id="play" type="button" value="Add" class="hidden"/>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Playlist Stats Table -->
+
+  {{#if videos.count}}
+  <table class="table table-hover">
+
+    <thead> 
+      <tr>
+        <th>Status</th>
+        <th>Added@</th>
+        <th>Listening</th>
+        <th>Shared by</th>
+        <!-- 
+        <th>Stars</th>
+        <th>Rating</th> 
+        -->
+        <th>Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each videos}}
+      <tr>
+        <td>
+        {{#if this.current}}
+          <strong>Playing</strong>
+          {{else}}
+          <!-- <input type="image" class="replaySong" src="replay.jpg" alt="replay" height="16" width="16" /> -->
+          {{/if}}
+        </td>
+        <td>
+          {{this.hour}}
+        </td>
+        <td>
+          {{this.title}}
+        </td>
+        <td>
+          {{this.user}}
+        </td>
+        <!-- 
+        <td><img src="starts.png"></td>
+        <td><input type="button" value="TBD"/></td> 
+        -->
+        <td>
+          <input type="image" class="deleteSong" src="remove.jpg" alt="replay" height="16" width="16" />
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+    <div class="alert alert-info">
+      There is nothing yet to show!
+    </div>
+  {{/if}}
+</template>
