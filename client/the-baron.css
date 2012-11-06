@@ -51,7 +51,6 @@ input#messageBox {
 
 /* ------------------------------------------------------------------
 [6. Extra] 
- style="display: block; overflow-y: auto; width: 600px; height: 350px;"
 */
 .movie-result td {vertical-align: top }
 .movie-image { width: 60px; }
