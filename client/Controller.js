@@ -20,7 +20,7 @@ Controller = {
 	load_video: function (channel){
 		if (channel === undefined) channel = this._.default_channel;
 
-		if (_player != undefined){
+		if (_player != undefined && _player.loadVideoById != undefined){
 	 		_player.loadVideoById(Template.player.current_video());
 	 		CurrentVideos.update({channel:'default'},
 	 		 {$set: 
