@@ -6,7 +6,7 @@
          var avg = 0, total = 0;
          count = cursor.count();
          if(count == 0) {
-           avg = 72; //VP rule
+           avg = "72"; //VP rule
          } else {
           cursor.forEach(function(e)
          {
