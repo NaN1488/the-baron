@@ -45,15 +45,19 @@ Template.playlist.rendered = function(){
             $('#play').trigger('click');
         }
    });
+   $().ready(function (){
+        Preview.bind_search_result();
+   })
+  
 }
 function formatVideoList (entry){
     var time = new Date(null);
     time.setSeconds(entry.media$group.yt$duration.seconds);
     var minutes = time.toTimeString().substring(3,9);
     
-    var markup = "<table class='movie-result'><tr>";
+    var markup = "<table class='movie-result' ><tr>";
         //if (entry.media$group.media$thumbnail !== undefined && movie.media$group.media$thumbnail[0] !== undefined) {
-        markup += "<td class='movie-image'><img src='" + entry.media$group.media$thumbnail[3].url + "' /><strong class='movie-synopsis'>" + minutes + "</strong></td>";
+        markup += "<td class='movie-image'><img data-video-id='"+entry.id+"' class='youtube-search-result' src='" + entry.media$group.media$thumbnail[3].url + "' /><strong class='movie-synopsis'>" + minutes + "</strong></td>";
        
         //}
         markup += "<td class='movie-info'><div class='movie-title'>" + entry.title.$t + "</div>";
