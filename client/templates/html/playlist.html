@@ -1,16 +1,15 @@
 <!-- Playlist
     ================================================== -->
 <template name="playlist">
-  <h3>Playlist</h3>
   {{#if user_logged_in}}
-    <p>
-      Channel Admin can: <input type="button" value="Empty Playlist" id="emptyPlaylist" />
-    </p>
+  <input type="button" value="Empty Playlist" id="emptyPlaylist" class="btn pull-right" />
   {{/if}}
-  
+  <h3>Playlist</h3>
 
   <!-- Playlist Searchbox -->
-  
+  <input id="url" type="text" name="url">
+    
+  <!-- 
   <table>
     <tr>
       <td>
@@ -26,9 +25,9 @@
       </td>
     </tr>
   </table>
+  -->
 
   <!-- Playlist Stats Table -->
-
   {{#if videos.count}}
   <table class="table table-hover">
 
