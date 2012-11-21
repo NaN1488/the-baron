@@ -94,38 +94,47 @@ h6{font-family:'proxima_nova_rgregular';font-weight:normal;}
 /* ------------------------------------------------------------------
 [4. Content] 
 */
-.innerColumn{padding:30px;}
+.innerColumn{margin:30px;}
 
 /*TITLE*/
-.titleContainer{border-bottom:1px solid #ddd;}
+.titleContainer{background:#eee;border-bottom:1px solid #ddd;text-shadow:0 1px 0 #fff;-webkit-border-radius:3px 3px 0 0;-moz-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;}
+.titleContainer .innerColumn{margin:0 30px;padding:12px 0 7px;}
+.titleContainer .star-rating{margin-top:15px;}
 
 /*PLAYLIST*/
 .playlistContainer .btn{margin-top:7px;}
 
 
 /*VIDEO*/
-.videoContainer iframe{width:100%;max-width:100%;}
+.videoContainer iframe{width:100%;max-width:100%;padding:1px;border:3px solid #ddd;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
   
 @media only screen and (min-width : 979px) {
-  /*DATA*/
-  .dataContainer .innerColumn{padding-right:0;}
+
+  /*PLAYLIST*/
+  .playlistContainer .innerColumn{margin-right:0;}
 
   /*VIDEO*/
-  .videoContainer .innerColumn{padding-left:0;}  
+  .videoContainer .innerColumn{margin-left:0;}  
 }
 
 /* < 1200 */
 @media only screen and (max-width : 1199px) {
+  .innerColumn{margin:20px;}
   .playerContainer{margin:0;}
+  .titleContainer.span12,
   .playerContainer .span5,
   .playerContainer .span7{width:100%;margin:0;}
-  .playerContainer .innerColumn{padding:20px 20px 0 !important;}
+  .playerContainer .innerColumn{margin:20px 20px 0 !important;}
+  .titleContainer .innerColumn{margin:0 30px !important;}
+
 }
 
 /* < 979 */
 @media only screen and (max-width : 979px) {
   body{padding:0;}
-  .layout{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;margin:0;width:auto;}
+  .layout{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent;margin:0;width:auto;}
+  .layout,
+  .titleContainer.span12{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
   .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top{margin-left:0;}
   .navbar .btn-navbar{margin-top:14px;}
   .navbar .brand img{width:60%;}

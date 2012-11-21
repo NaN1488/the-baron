@@ -51,6 +51,14 @@
 <div class="layout container">
   <div class="row playerContainer">
     
+    <!-- TITLE -->
+    <div class="titleContainer span12">
+      <div class="innerColumn">
+        {{> rateas}} 
+        <h2 id="title">#Video title</h2>
+      </div>
+    </div>
+    
     <!-- VIDEO -->
     <div class="videoContainer span7 pull-right">
       <div class="innerColumn">
@@ -59,21 +67,10 @@
       </div>
     </div>
     
-    <!-- DATA -->
-    <div class="dataContainer span5">
+    <!-- PLAYLIST -->
+    <div class="playlistContainer span5">
       <div class="innerColumn">
-        
-        <!-- TITLE -->
-        <div class="titleContainer">
-          {{> rateas}} 
-          <h2 id="title">#Video title</h2>
-        </div>
-        
-        <!-- PLAYLIST -->
-        <div class="playlistContainer">
-          {{> playlist}}
-        </div>
-        
+        {{> playlist}}
       </div>
     </div>
     
