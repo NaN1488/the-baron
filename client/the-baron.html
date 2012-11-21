@@ -1,19 +1,50 @@
 <head>
-  <title>Video Baron</title>
+<meta charset="utf-8">
+<title>Video Baron</title>
+<meta name="description" content="">
+<meta name="author" content="Video baron">
 </head>
-
 <body>
-  <div class='container'>
-    <div class="row">
-      <div class="span12 clearfix">
-        <div class="pull-left">
-           <h1 class="pull-right">Video Baron</h1>
-        </div><!--/Logo -->
-        <div class="pull-right">
-          {{loginButtons align="right"}}
-        </div><!--/LoginButtons Container -->
+<div class="navbar navbar-static-top navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <!-- LOGO -->
+        <a class="brand" href="/"><img src="/img/common/lg_theBaron.png"/></a>
+
+        <div class="nav-collapse collapse">
+
+          <ul class="nav proximaNovaSemibold">
+            <li class="active"><a href="#">Channels</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="nav-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          
+          
+          <div class="pull-right ">{{loginButtons align="right"}}</div>
+
+        </div><!--/.nav-collapse -->
+
       </div>
-    </div><!--/row -->
+    </div>
+  </div>
+
+	<div class="layout container">
 
     <div class="row">
       <div class="span7">
@@ -40,7 +71,7 @@
         
       </div><!--/Top (?) -->
     </div><!--/Row -->
-  </div><!--/Container -->
+</div><!--/Container -->
 </body>
 
 <!-- Chat
