@@ -82,8 +82,15 @@
     <div class="span7">
       <div class="innerColumn">
         {{> entry}}
-        <div style="display: block; overflow-y: auto; width: 600px; height: 350px;">
-          {{> messages}}
+        <div class="row">
+          <div class="span5">
+            <div class="messagesContainer">
+              {{> messages}}
+            </div>
+            <div class="span7">
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -98,47 +105,3 @@
 </div>
 
 </body>
-
-<!-- Chat
-    ================================================== -->
-<template name="entry">
-  <h3>Chat</h3>
-  {{> clean}}
-  {{#if user_logged_in}}
-  <div id="messagesInputDiv">
-    <table>
-      <tr>
-        <td><input type="text" id="messageBox" placeholder="Your Message"></td>
-        <td><input id="editingMessage" type="image" src="edit.jpg" alt="replay" height="26" width="26" style="display: none;"/></td>
-      </tr>
-    </table>
-  </div>
-  {{else}}
-    <div class="alert alert-info">
-      Please log in to use the chat!
-    </div>
-  {{/if}}
-</template>
-
-<template name="clean">
-  {{#if user_logged_in}}
-    Channel Admin can: <input type="button" id="cleanChat" value="Empty Chat">
-  {{/if}}
-</template>
-
-<template name="messages">
-  {{#each messages}}
-     {{> message}}
-  {{/each}}
-</template>
-
-<template name="message">
-  <p style="font-size: 10px;">
-    <input type="image" class="deleteChatLine" src="remove.jpg" alt="replay" height="16" width="16" />
-    <input type="image" class="editChatLine" src="edit.jpg" alt="replay" height="16" width="16" />
-    {{formmatedDate}}<strong> - {{name}}</strong> says: {{message}}
-    {{#if edited}}
-      <input type="image" src="edited.jpg" alt="edited" height="16" width="16" />
-    {{/if}}
-  </p>
-</template>

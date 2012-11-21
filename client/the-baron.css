@@ -12,7 +12,8 @@ Version:	0.1
 3. 	Navigation / #navbar
 4. 	Content / #content
 5. 	Playlist / #playlist
-6. 	Extra
+6.  Chat
+7. 	Extra
 -------------------------------------------------------------------*/
 
 /* ------------------------------------------------------------------
@@ -154,7 +155,11 @@ input#messageBox {
 }
 
 /* ------------------------------------------------------------------
-[6. Extra] 
+[6. Chat] 
+*/
+.messagesContainer{overflow-y: auto;width:400px;max-height: 400px;}
+/* ------------------------------------------------------------------
+[7. Extra] 
 */
 .movie-result td {vertical-align: top }
 .movie-image { width: 60px; }

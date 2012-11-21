@@ -35,3 +35,12 @@ Template.playlist.events({
         playVideo((this).key);
     }
   });
+
+Template.playlist.events({
+  'click input#addMediaButton': function() {
+    if($("#addMedia").is(":visible"))
+      $("#addMedia").hide("slow");
+    else
+      $("#addMedia").show("slow");
+  }
+});
