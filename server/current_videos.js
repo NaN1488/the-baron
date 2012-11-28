@@ -1,4 +1,4 @@
-CurrentVideos = new Meteor.Collection('current_videos');
+
 
 Meteor.startup(function() {
   CurrentVideos.remove({});

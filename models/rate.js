@@ -1,0 +1,1 @@
+Rates = new Meteor.Collection('rates');

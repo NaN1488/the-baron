@@ -1,0 +1,1 @@
+CurrentVideos = new Meteor.Collection('current_videos');

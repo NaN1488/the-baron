@@ -1,0 +1,174 @@
+/*------------------------------------------------------------------
+[Video Baron's Master Stylesheet]
+
+Version:	0.1 
+
+[Table of contents]
+
+0. 	General
+0.1 Fonts
+1. 	Body
+2. 	Header / #header
+3. 	Navigation / #navbar
+4. 	Content / #content
+5. 	Playlist / #playlist
+6.  Chat
+7. 	Extra
+-------------------------------------------------------------------*/
+
+/* ------------------------------------------------------------------
+[0. General]
+ */
+.row{
+	margin-bottom: 10px;
+}
+html{background:url(/img/common/bg_body.png) repeat;}
+body{background:url(/img/common/bg_layoutTop.png) repeat-x 0 0;}
+
+/* ------------------------------------------------------------------
+[0.1 Fonts]
+ */
+@font-face {
+    font-family: 'proxima_nova_rgregular';
+    src: url('/fonts/proximanova-regular-webfont.eot');
+    src: url('/fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/proximanova-regular-webfont.woff') format('woff'),
+         url('/fonts/proximanova-regular-webfont.ttf') format('truetype'),
+         url('/fonts/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'proxima_nova_ltbold';
+    src: url('/fonts/proximanova-semibold-webfont.eot');
+    src: url('/fonts/proximanova-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/proximanova-semibold-webfont.woff') format('woff'),
+         url('/fonts/proximanova-semibold-webfont.ttf') format('truetype'),
+         url('/fonts/proximanova-semibold-webfont.svg#proxima_nova_ltbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.proximaNovaRegular{font-family:'proxima_nova_rgregular';}
+.proximaNovaSemibold{font-family:'proxima_nova_ltbold';}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{font-family:'proxima_nova_rgregular';font-weight:normal;}
+
+/* ------------------------------------------------------------------
+[1. Body] 
+*/
+.layout{background:#fff;-webkit-box-shadow:0 0 10px 0 rgba(0,0,0,0.3);box-shadow:0 0 10px 0 rgba(0,0,0,0.3);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+
+/* ------------------------------------------------------------------
+[2. Header] 
+*/
+@media only screen and (min-width : 980px) {
+  .navbar .container{padding-bottom:4px;}
+  .navbar .brand img{margin-left:20px;}
+	.navbar-inner{background:transparent !important;-webkit-box-shadow:0 0 0 0 transparent !important;box-shadow:0 0 0 0 transparent !important;border:0 !important;}
+  .navbar-inverse .nav li > a{color:#9d9d9d !important;font-size:1.28em;}
+  .navbar-inverse .nav > li{position:relative;}
+  .navbar-inverse .nav > li:after{position:absolute;background:url(/img/common/bg_headerSep.png) 0 0 no-repeat;width:2px;height:24px;display:block;left:0;top:0;}
+  .navbar-inverse .nav > li:first-child:after{display:none;}
+  .navbar-inverse .nav > li > a{text-shadow:0 1px 0 #000;}
+  .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, 
+  .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, 
+  .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle{background:transparent;color:#dfdede !important;}
+  .navbar-inverse .nav li > a:hover,
+  .navbar-inverse .nav .active > a, 
+  .navbar-inverse .nav .active > a:hover, 
+  .navbar-inverse .nav .active > a:focus{background:transparent;-webkit-box-shadow:0 0 0 0 transparent !important;box-shadow:0 0 0 0 transparent !important;color:#dfdede !important;}
+  .navbar-inverse .nav .dropdown-menu li > a{color:#666 !important;}
+  .navbar-inverse .nav .dropdown-menu li > a:hover{background:#333;color:#eee !important;}
+  .navbar-inverse .nav{padding-left:30px;padding-top:37px;}
+}
+
+
+/* ------------------------------------------------------------------
+[3. Navigation] 
+*/
+
+/* ------------------------------------------------------------------
+[4. Content] 
+*/
+.innerColumn{margin:30px;}
+
+/*TITLE*/
+.titleContainer{background:#eee;border-bottom:1px solid #ddd;text-shadow:0 1px 0 #fff;-webkit-border-radius:3px 3px 0 0;-moz-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;}
+.titleContainer .innerColumn{margin:0 30px;padding:12px 0 7px;}
+.titleContainer .star-rating{margin-top:15px;}
+
+/*PLAYLIST*/
+.playlistContainer .btn{margin-top:7px;}
+
+
+/*VIDEO*/
+.videoContainer iframe{width:100%;max-width:100%;padding:1px;border:3px solid #ddd;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+  
+@media only screen and (min-width : 979px) {
+
+  /*PLAYLIST*/
+  .playlistContainer .innerColumn{margin-right:0;}
+
+  /*VIDEO*/
+  .videoContainer .innerColumn{margin-left:0;}  
+}
+
+/* < 1200 */
+@media only screen and (max-width : 1199px) {
+  .innerColumn{margin:20px;}
+  .playerContainer{margin:0;}
+  .titleContainer.span12,
+  .playerContainer .span5,
+  .playerContainer .span7{width:100%;margin:0;}
+  .playerContainer .innerColumn{margin:20px 20px 0 !important;}
+  .titleContainer .innerColumn{margin:0 30px !important;}
+
+}
+
+/* < 979 */
+@media only screen and (max-width : 979px) {
+  body{padding:0;}
+  .layout{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent;margin:0;width:auto;}
+  .layout,
+  .titleContainer.span12{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+  .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top{margin-left:0;}
+  .navbar .btn-navbar{margin-top:14px;}
+  .navbar .brand img{width:60%;}
+  html{background:#fff;}
+  body{background:#fff;}
+}  
+
+input#messageBox {
+	width: 400px;
+}
+
+/* ------------------------------------------------------------------
+[5. Playlist / #playlist] 
+*/
+.select2-container{
+	width: 100%;
+}
+
+/* ------------------------------------------------------------------
+[6. Chat] 
+*/
+.messagesContainer{overflow-y: auto;width:400px;max-height: 400px;}
+/* ------------------------------------------------------------------
+[7. Extra] 
+*/
+.movie-result td {vertical-align: top }
+.movie-image { width: 60px; }
+.movie-image img { height: 80px; width: 60px;  }
+.movie-info { padding-left: 10px; vertical-align: top; }
+.movie-title { font-size: 1.2em; padding-bottom: 15px; }
+.movie-synopsis { font-size: .8em; color: #888; }
+.select2-highlighted .movie-synopsis { font-size: .8em; color: #eee; }
+.bigdrop.select2-container .select2-results {max-height: 300px;}
+
+
+
