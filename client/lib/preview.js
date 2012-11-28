@@ -42,7 +42,7 @@ Preview = {
                  //_player.setVolume($(this).data('current_volume'));
                 $(self._.css_preview_container).remove();
             }  
-        }, 300);
+        }, 600);
 	},
 
 	bind_search_result: function (){
