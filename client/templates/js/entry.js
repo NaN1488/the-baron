@@ -1,3 +1,5 @@
+//the code below fails
+/*
 Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
     ok: function(text, event) {
       //var nameEntry = Meteor.user().emails[0].address;
@@ -47,3 +49,4 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
       }
     }
   });
+  */
