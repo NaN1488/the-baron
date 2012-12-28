@@ -5,7 +5,7 @@ if (_player == undefined){
     // after the API code downloads.
   function onYouTubeIframeAPIReady() {
     _player = new YT.Player('_player', {
-      playerVars:{autoplay: 1, start: Controller.current_time()},
+      playerVars:{autoplay: 0, start: 0},
       height: '390',
       width: '640',
       videoId: Controller.current_video(),
@@ -17,8 +17,10 @@ if (_player == undefined){
   }
   // The API will call this function when the video player is ready.
   function onPlayerReady(event) {
-    event.target.playVideo();
-
+    Meteor.call('current_time_video', function (err, data){
+      _player.seekTo(data);
+      _player.playVideo();
+    });
   }
 
   // The API calls this function when the player's state changes.
