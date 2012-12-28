@@ -14,4 +14,7 @@ Meteor.startup(function() {
 
     }
   }
+  if (Channels.find().count() === 0){
+    Channels.insert({name:'default', video_id:'', start_at: 0});
+  }
 });
