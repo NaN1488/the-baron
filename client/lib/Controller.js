@@ -19,7 +19,7 @@ Controller = {
 	//load the video and update the CurrentVideos for a given channel
 	load_video: function (channel){
 		if (channel === undefined) channel = this._.default_channel;
-
+		//check if _player is ready
 		if (_player != undefined && _player.loadVideoById != undefined){
 	 		_player.loadVideoById(Template.player.current_video());
 	 		CurrentVideos.update({channel:'default'},
@@ -30,9 +30,21 @@ Controller = {
 	 		 		duration: _player.getDuration()
 	 		 	}
 	 		 });
+
+	 		Meteor.call('get_server_time', function (err, data){
+	 			Channels.update({name:'default'}, 
+	 			{
+	 				$set:{
+	 					video_id:Template.player.current_video(),
+	 					start_at: data
+	 				}
+	 			}
+	 			);
+	 		})
+	 		
  		}
 	},
-	//return curren time
+	/*//return curren time
 	current_time: function (){
 		current_videos = CurrentVideos.find({channel:'default', video_id: Template.player.current_video()}).fetch();
  		time = 0;
@@ -42,7 +54,7 @@ Controller = {
  		 	CurrentVideos.update({channel:'default'}, {$set: {'time':time, video_id: Template.player.current_video()} });
  		}
 		return time;
-	},
+	},*/
 	// return video id
 	current_video: function (){
 		var videos = Videos.find({current: true}).fetch();
