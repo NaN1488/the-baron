@@ -1,6 +1,7 @@
 //set current rate
 Template.rateas.rate = function(){
-  current_video = CurrentVideos.findOne({channel: 'default'});
+  /*console.log(Channels.find({name: 'default'}).fetch());
+  current_video = Channels.find({name: 'default'}).fetch()[0].video_id;
   
   if (current_video != undefined) {  
     current_video_id = current_video.video_id;
@@ -18,14 +19,14 @@ Template.rateas.rate = function(){
       return avg.toString();
     }
 
-  }
+  }*/
   return "72"
 }
 
 //events
 Template.rateas.events({
     //set rate for the current video
-    'click a.stars': function(event) {
+    /*'click a.stars': function(event) {
       current_video_id = CurrentVideos.findOne({channel: 'default'}).video_id;
       video_rate = parseInt($(event.target).attr('id').slice(5,6));
       var already_rate = Rates.findOne({video: current_video_id, user_id: Meteor.userId()});
@@ -35,5 +36,7 @@ Template.rateas.events({
         Rates.update({video: current_video_id, user_id: Meteor.userId()}, {$set: {rate:video_rate}});
       }
     }
+    */
+
 
 });
