@@ -3,62 +3,36 @@ Controller = {
 	_:{
 		default_channel:'default'
 	},
-	/**
-	* send the duration of the current video
-	* @used current_time.js
-	*/
-	update_duration: function (channel){
-		if (channel === undefined) channel = this._.default_channel;
-		CurrentVideos.update({channel:channel},
- 		 {$set: 
- 		 	{
- 		 		duration: _player.getDuration()
- 		 	}
- 		 });
-	},
-	//load the video and update the CurrentVideos for a given channel
+	//this method propagate the selected video to the rest of the clients
 	load_video: function (channel){
 		if (channel === undefined) channel = this._.default_channel;
 		//check if _player is ready
 		if (_player != undefined && _player.loadVideoById != undefined){
-	 		_player.loadVideoById(Template.player.current_video());
-	 		CurrentVideos.update({channel:'default'},
-	 		 {$set: 
-	 		 	{
-	 		 		time:0, 
-	 		 		video_id:Template.player.current_video(),
-	 		 		duration: _player.getDuration()
-	 		 	}
-	 		 });
-
-	 		Meteor.call('get_server_time', function (err, data){
-	 			Channels.update({name:'default'}, 
+	 		Meteor.call('current_time_video', function (err, data){
+	 			_player.loadVideoById(Controller.current_video());
+	 			_player.seekTo(data);
+	 		})	
+ 		}
+	},
+	// return video id for a given channel
+	current_video: function (channel){
+		if (channel === undefined) channel = this._.default_channel;
+		channels = Channels.find({name:channel}).fetch();
+		if(channels.length == 0) return false;
+		return channels[0].video_id;
+	},
+	play_video: function (video_id, channel){
+		if (channel === undefined) channel = this._.default_channel;
+		Meteor.call('get_server_time', function (err, data){	
+	 		Channels.update({name:channel}, 
 	 			{
 	 				$set:{
-	 					video_id:Template.player.current_video(),
+	 					video_id: video_id,
 	 					start_at: data
 	 				}
 	 			}
-	 			);
-	 		})
-	 		
- 		}
-	},
-	/*//return curren time
-	current_time: function (){
-		current_videos = CurrentVideos.find({channel:'default', video_id: Template.player.current_video()}).fetch();
- 		time = 0;
- 		if (current_videos.length == 1) {
- 			time = current_videos[0].time
- 		}else{
- 		 	CurrentVideos.update({channel:'default'}, {$set: {'time':time, video_id: Template.player.current_video()} });
- 		}
-		return time;
-	},*/
-	// return video id
-	current_video: function (){
-		var videos = Videos.find({current: true}).fetch();
-		if(videos.length == 0) return false;
-		return videos[0].key;
+	 		);
+	 		_player.loadVideoById(video_id);
+	 	})	
 	}
 }

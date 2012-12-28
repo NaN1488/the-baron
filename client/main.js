@@ -49,6 +49,7 @@ function playVideo(key) {
       var hour = locale.formmatedDate;
 
        //set current false for all videos
+       
        Videos.update({current: true}, {$set: {current: false}}, false, true);
        if (Videos.find({'key': key}).count() > 0) {
          Videos.update({'key': key}, {$set: {current: true}}, false, true);
@@ -59,6 +60,8 @@ function playVideo(key) {
                          hour: hour, 
                          user: Users.get_current_user()});
        }
+
+       Controller.play_video(key);
     });
   }
 }

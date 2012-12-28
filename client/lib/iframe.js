@@ -26,9 +26,9 @@ if (_player == undefined){
   // The API calls this function when the player's state changes.
   // The function indicates that when playing a video (state=1)
   function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING) {
-      Controller.update_duration();
-    }
+    /*if (event.data == YT.PlayerState.PLAYING) {
+    
+    }*/
   }
   function stopVideo() {
     _player.stopVideo();
