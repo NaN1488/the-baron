@@ -52,9 +52,10 @@ function playVideo(key) {
        
        Videos.update({current: true}, {$set: {current: false}}, false, true);
        if (Videos.find({'key': key}).count() > 0) {
-         Videos.update({'key': key}, {$set: {current: true}}, false, true);
+         Videos.update({'key': key}, {$set: {current: true, youtube: video_selected}}, false, true);
        } else {
-         Videos.insert({ key: key, 
+          console.log('inserte video', video_selected);
+          Videos.insert({ key: key, 
                          title: video_selected.title.$t,
                          current: true, 
                          hour: hour, 

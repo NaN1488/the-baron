@@ -82,7 +82,6 @@ Template.playlist.rendered = function(){
    $('#url').change(function (){
         if ($('#url').data('send') != video_selected.id){
             $('#url').data('send',$(this).val());
-            $('#title').html(video_selected.title.$t);
             $('#play').trigger('click');
         }
    });
