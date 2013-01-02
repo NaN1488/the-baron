@@ -171,4 +171,7 @@ input#messageBox {
 .bigdrop.select2-container .select2-results {max-height: 300px;}
 
 
-
+.video_result{
+  border:solid 1px #ccc;
+  cursor: pointer;
+}
