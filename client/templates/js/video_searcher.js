@@ -13,5 +13,11 @@ Template.video_searcher.events({
 	},
 	'click .video_result': function (e){
 		playVideo($(e.currentTarget).data('video'));
+	},
+	'click button#next_page': function (e){
+		VideoSearcher.youtube(VideoSearcher._.last_query, VideoSearcher.next_page());
+	},
+	'click button#prev_page': function (e){
+		VideoSearcher.youtube(VideoSearcher._.last_query, VideoSearcher.prev_page());
 	}
 });

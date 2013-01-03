@@ -1,12 +1,15 @@
 VideoSearcher = {
 	_:{
-		result_per_page: 10,
+		result_per_page: 5,
+		last_query: null,
+		last_page: 1
 	},
 	youtube: function(query, page){
-		
 		if (page === undefined) page = 1;
-		
+		this._.last_page = page;
 		page = (page==1)?1:(((page-1) * this._.result_per_page)+1)
+		this._.last_query = query;
+		console.log(page);
 		
 		var data = {
 			q:query, 
@@ -23,9 +26,15 @@ VideoSearcher = {
 			dataType: 'jsonp',
 			data: data,
 			success: function(response){
-				VideoResults.fill_result_list(response.feed.entry);
+				VideoResults.fill_result_list(response.feed.entry, page);
 				YoutubeAutocomplete.hide_autocomplete();
 			}
 		});
+	},
+	next_page: function (){
+		return this._.last_page + 1;
+	},
+	prev_page: function (){
+		return this._.last_page - 1;
 	}
 }

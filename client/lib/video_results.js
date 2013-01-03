@@ -7,16 +7,24 @@ VideoResults = {
 			'<div class="result_title">%title%</div>'+
 			//'<div class="result_description movie-synopsis">%description%</div>'+
 			''+
-			'</div>'
+			'</div>',
+		template_prev_button: '<div class="paginator"><button class="btn" id="prev_page" >‹</button></div>',
+		template_next_button: '<div class="paginator"><button class="btn" id="next_page" >›</button></div>'
+
+
 	},
-	fill_result_list: function (videos, source){
-		var html = '';
+	fill_result_list: function (videos, page){
+		var list_of_videos_html = '';
 		this._.videos_result = videos;
 		var self = this;
 		$(videos).each(function (i, v){
-			html += self.formatVideoList(v);
+			list_of_videos_html += self.formatVideoList(v);
 		});
-		$(this._.result_container).html(html);
+		list_of_videos_html += this._.template_next_button;
+		if (page > 1){
+			list_of_videos_html = this._.template_prev_button + list_of_videos_html;
+		}
+		$(this._.result_container).html(list_of_videos_html);
 	},
 	get_video_id: function (entry){
 		return entry.id.$t.match(/(?!.*\/).*/)[0];
