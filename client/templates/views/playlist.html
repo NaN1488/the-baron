@@ -2,9 +2,16 @@
     ================================================== -->
 <template name="playlist">
   {{#if user_logged_in}}
-  <input type="button" value="Empty Playlist" id="emptyPlaylist" class="btn pull-right" />
+    <button id="emptyPlaylist" class="blue-pill btn pull-right">Clean Playlist</button>
+
+    <!-- <input type="button" value="Empty Playlist" id="emptyPlaylist" class="blue-pill btn pull-right" /> -->
+  
   {{/if}}
+  <button id="playlistMain" class="blue-pill btn pull-right">Options</button>
+  <button id="playlistOptions" class="blue-pill btn pull-right">Main</button>
   <h3>Playlist</h3>
+
+
 
   <!-- Playlist Searchbox -->
   <input id="url" type="text" name="url">
