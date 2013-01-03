@@ -8,7 +8,7 @@ if (_player == undefined){
       playerVars:{autoplay: 0, start: 0},
       height: '390',
       width: '640',
-      videoId: Controller.current_video(),
+      videoId: '',
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
@@ -17,10 +17,12 @@ if (_player == undefined){
   }
   // The API will call this function when the video player is ready.
   function onPlayerReady(event) {
-    Meteor.call('current_time_video', function (err, data){
-      _player.seekTo(data);
+    console.log('onPlayerReady');
+    Controller.load_video();
+    /*Meteor.call('current_time_video', function (err, time){
+      _player.seekTo(time);
       _player.playVideo();
-    });
+    });*/
   }
 
   // The API calls this function when the player's state changes.
