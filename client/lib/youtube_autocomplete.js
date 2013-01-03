@@ -40,5 +40,8 @@
                 $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
             }
         });
+    },
+    hide_autocomplete: function(){
+        $('.ui-autocomplete').hide();
     }
  };

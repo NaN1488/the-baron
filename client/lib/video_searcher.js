@@ -3,6 +3,7 @@ VideoSearcher = {
 		result_per_page: 10,
 	},
 	youtube: function(query, page){
+		
 		if (page === undefined) page = 1;
 		
 		page = (page==1)?1:(((page-1) * this._.result_per_page)+1)
@@ -23,6 +24,7 @@ VideoSearcher = {
 			data: data,
 			success: function(response){
 				VideoResults.fill_result_list(response.feed.entry);
+				YoutubeAutocomplete.hide_autocomplete();
 			}
 		});
 	}
