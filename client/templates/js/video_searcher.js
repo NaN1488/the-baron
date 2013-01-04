@@ -10,6 +10,7 @@ Template.video_searcher.events({
 	'click #btn_video_searcher': function (e){
 		VideoSearcher.youtube($('input#video_searcher').val());
 		e.preventDefault();
+		return false;
 	},
 	'click .video_result': function (e){
 		playVideo($(e.currentTarget).data('video'));

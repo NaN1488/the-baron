@@ -9,7 +9,7 @@ VideoResults = {
 			''+
 			'</div>',
 		template_prev_button: '<div class="paginator"><button class="btn" id="prev_page" ><i class="icon-chevron-left"></i></button></div>',
-		template_next_button: '<div class="paginator"><button class="btn" id="next_page" ><i class="icon-chevron-right"><i/></button></div>'
+		template_next_button: '<div class="paginator"><button class="btn" id="next_page" ><i class="icon-chevron-right"></i></button></div>'
 
 
 	},

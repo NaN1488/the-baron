@@ -41,7 +41,7 @@ Template.playlist.events({
 
 //Rendered is like document ready Jquery
 Template.playlist.rendered = function(){
-    $("#url").select2({
+   /* $("#url").select2({
             placeholder: "Search in Youtube",
             minimumInputLength: 3,
             ajax: {
@@ -87,6 +87,6 @@ Template.playlist.rendered = function(){
    });
    $().ready(function (){
         Preview.bind_search_result();
-   })
+   })*/
   
 }
