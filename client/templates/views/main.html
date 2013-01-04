@@ -62,39 +62,44 @@
     
     <!-- VIDEO -->
     <div class="videoContainer span7 pull-right">
-      <div class="innerColumn">
+      <div class="innerColumn no-margin_bottom" >
         {{> viewer}}
         {{> player}}
       </div>      
-        <!-- CHAT -->
-      <div class="span6">
-        <div class="innerColumn">
-          {{> entry}}
-          <div class="row">
-            <div class="span5">
-              <div class="messagesContainer">
-                {{> messages}}
-              </div>
-              <div class="span7">
-                
+    </div>
+    
+   
+    <div class="span5">
+        <ul id="right_tab" class="nav nav-tabs">
+          <li class="active"><a href="#chat" data-toggle="tab">Chat</a></li>
+          <li><a href="#playlist" data-toggle="tab">PlayList</a></li>
+          <li><a href="#myplaylist" data-toggle="tab">My PlayList</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane fade in active" id="chat">
+             <!-- CHAT -->
+            {{> entry}}
+            <div class="row">
+              <div class="span5">
+                <div class="messagesContainer">
+                  {{> messages}}
+                </div>
               </div>
             </div>
           </div>
+          <div class="tab-pane fade" id="playlist">
+             <!-- PLAYLIST -->
+            {{> playlist}}
+          </div>
+          <div class="tab-pane fade" id="myplaylist">
+             <!-- PLAYLIST -->
+            
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- PLAYLIST -->
-    <div class="playlistContainer span5">
-      <div class="innerColumn">
-        {{> playlist}}
-      </div>
     </div>
     
   </div>
-  <div id="video_searcher_container">
-    {{> video_searcher}}
-  </div>
+  {{> video_searcher}}
   <div class="row">
     
     

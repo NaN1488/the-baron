@@ -9,7 +9,6 @@ VideoSearcher = {
 		this._.last_page = page;
 		page = (page==1)?1:(((page-1) * this._.result_per_page)+1)
 		this._.last_query = query;
-		console.log(page);
 		
 		var data = {
 			q:query, 
