@@ -18,7 +18,6 @@
                         q: $(input_search_selector).val()
                     },
                     success: function( data ) {
-                        console.log(data[1]);
                         response( $.map( data[1], function( item ) {
                             return {
                                 label: item[0],
@@ -33,10 +32,19 @@
                 //change video
                 $('#btn_video_searcher').trigger('click');
             },
-            open: function() {
+            open: function(event, ui) {
+                var $input = $(event.target),
+                    $results = $input.autocomplete("widget"),
+                    top = $results.position().top,
+                    height = $results.height(),
+                    inputHeight = $input.height(),
+                    newTop = top - height - inputHeight;
+
+                $results.css("top", (newTop - 14) + "px");
                 $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
             },
-            close: function() {
+            close: function(event, ui) {
+
                 $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
             }
         });
