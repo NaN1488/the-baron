@@ -19,6 +19,7 @@ Controller = {
 			 			return false;
 	 			}
 	 			_player.video_id = current_video_id;
+	 			if (time !== null)
 	 			_player.loadVideoById(current_video_id, time);
 	 		});
  		}

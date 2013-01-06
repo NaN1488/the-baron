@@ -5,9 +5,11 @@ BaronServer = {
 	current_time_video: function (channel){
 		if (channel === undefined) channel = 'default'
 		current_channel = Channels.find({name:channel}).fetch()[0];
-		//TODO: get the duration of the current video
+		duration = Videos.find({key:current_channel.video_id}).fetch()[0].duration;
 		diff_time = (Date.now() - current_channel.start_at) / 1000;
-		return Math.floor(diff_time);
+		if (diff_time < duration)
+			return Math.floor(diff_time);
+		return null;
 	},
 	get_server_time: function (){
 		return Date.now();
