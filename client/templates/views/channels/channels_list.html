@@ -1,0 +1,28 @@
+<template name="channels_list">
+  <div id="channels_list_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Available Channels</h3>
+    </div>
+    <div class="modal-body">
+      <ul>
+        {{# each channels}}
+          <li>{{> channel}}</li>
+        {{/each}}
+      </ul>
+      <div id="new_channel" >
+        <a id="create_new_channel" href="#">Create a new channel...</a>
+        <form style="display:none">
+            <fieldset>
+             <input type="text" name="name" placeholder="Give it a name...">
+             <button type="submit" class="btn">Submit</button>
+            </fieldset>
+        </form>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+  </div>
+</template>
