@@ -1,12 +1,11 @@
 ChannelHelper = {
   current: function(){
-    var current_channel = Session.get('currentChannel');
-    if(current_channel != undefined){
-      return current_channel
-    } else {
+    var channel_id = Session.get('currentChannelId');
+    if(channel_id == undefined){
       var default_channel = Channels.findOne({name: 'default'});
-      Session.set('currentChannel', default_channel);
+      Session.set('currentChannelId', default_channel._id);
       return default_channel;
     }
+      return Channels.findOne({_id: channel_id});
   }
 }

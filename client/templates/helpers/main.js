@@ -8,10 +8,21 @@ Handlebars.registerHelper('user_logged_in', function() {
 });
 
 Handlebars.registerHelper('current_channel', function() {
-  var current_channel_id = ChannelHelper.current();
-  return Channels.findOne({_id: current_channel_id});
+  return ChannelHelper.current();
+});
+
+Handlebars.registerHelper('current_channel_name', function() {
+  var channel = ChannelHelper.current();
+  if(channel == undefined){
+    return ''
+  } else {
+    return channel.name
+  }
 });
 
 Handlebars.registerHelper('is_current_channel', function(name) {
-     return (Channels.findOne({_id:ChannelHelper.current()}).name == name);
+  var channel = ChannelHelper.current();
+  if(channel != undefined){
+    return (ChannelHelper.current().name == name)
+  }
 });
