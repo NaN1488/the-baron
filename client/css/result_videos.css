@@ -1,0 +1,22 @@
+.video_result{
+  	cursor: pointer;
+  	display: inline-block;
+  	text-align: center;
+	height: 200px;
+}
+.duration {
+	position: absolute;
+	margin-top: 70px;
+	color: white;
+	float: left;
+	background-color: black;
+	font-size: 10px;
+	margin-left: 25px;
+	padding: 0 2px 0 2px;
+	display: block;
+}
+
+.paginator{
+	display: inline-block;
+	float: left;
+}

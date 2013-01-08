@@ -49,20 +49,21 @@ function playVideo(key) {
       var hour = locale.formmatedDate;
 
        //set current false for all videos
-       
+       console.log('before update videos');
        Videos.update({current: true}, {$set: {current: false}}, false, true);
        if (Videos.find({'key': key}).count() > 0) {
-         Videos.update({'key': key}, {$set: {current: true, youtube: video_selected}}, false, true);
+         Videos.update({'key': key}, {$set: {current: true}}, false, true);
        } else {
-          console.log('inserte video', video_selected);
+        video_youtube_obj = VideoResults.video(key);
           Videos.insert({ key: key, 
-                         title: video_selected.title.$t,
+                         title: video_youtube_obj.title.$t,
+                         duration: video_youtube_obj.media$group.yt$duration.seconds,
                          current: true, 
                          hour: hour, 
                          user: Users.get_current_user()});
        }
 
-       Controller.play_video(key);
+       Controller.change_video(key);
     });
   }
 }

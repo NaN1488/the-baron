@@ -1,0 +1,11 @@
+.tab-content, .nav-tabs {
+	margin-left: 10px;
+	margin-top: 32px;	
+}
+.tab-content{
+	height: 324px;
+	overflow: auto;
+	position: relative;
+	width:475px;
+	border-bottom: solid 1px #DDD;
+}
