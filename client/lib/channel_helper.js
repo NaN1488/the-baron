@@ -7,5 +7,8 @@ ChannelHelper = {
       return default_channel;
     }
       return Channels.findOne({_id: channel_id});
+  },
+  set_current: function(channel_id){
+    Session.set('currentChannelId', channel_id);
   }
 }
