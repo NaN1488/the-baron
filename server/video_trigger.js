@@ -1,4 +1,8 @@
 VideoTrigger = {
+	_:{
+		seconds_offset: 5
+	},
+
 	play_next_in_queue: function(channel) {
 		console.log('play_next_in_queue');
 		channel_data = Channels.findOne({name:channel});
@@ -19,7 +23,7 @@ VideoTrigger = {
 			});
 			Meteor.setTimeout(function () {	
 				VideoTrigger.play_next_in_queue(channel);
-			}, duration*1000);
+			}, (duration+VideoTrigger._.seconds_offset)*1000);
 
 		}
 	}
