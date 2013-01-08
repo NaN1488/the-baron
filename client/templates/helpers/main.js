@@ -8,9 +8,10 @@ Handlebars.registerHelper('user_logged_in', function() {
 });
 
 Handlebars.registerHelper('current_channel', function() {
-     return Channels.findOne({name: 'default'});
+  var current_channel_id = ChannelHelper.current();
+  return Channels.findOne({_id: current_channel_id});
 });
 
 Handlebars.registerHelper('is_current_channel', function(name) {
-     return (Channels.findOne({name: 'default'}).name == name);
+     return (Channels.findOne({_id:ChannelHelper.current()}).name == name);
 });

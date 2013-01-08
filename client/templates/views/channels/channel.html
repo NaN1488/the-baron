@@ -1,6 +1,8 @@
 <template name="channel">
   {{name}}
   {{#if is_current_channel name}}
-    Current!!!
+     - Current!!!
+  {{else}}
+    <a class="set_channel" href="#"><small>Set as active</small></a>
   {{/if}}
 </template>
