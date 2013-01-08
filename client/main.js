@@ -63,7 +63,7 @@ function playVideo(key) {
                          user: Users.get_current_user()});
        }
 
-       Controller.change_video(key);
+       Controller.add_video_to_queue(key);
     });
   }
 }
