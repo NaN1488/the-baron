@@ -12,6 +12,8 @@ Template.channels_list.events({
     e.preventDefault();
     var userId = Meteor.userId;
     var name = $target.find('[name=name]').val();
-    Channels.insert({name: name, video_id:'', start_at: 0, user_id: userId});
+    if(Channels.findOne({name: name}) == undefined){
+      Channels.insert({name: name, video_id:'', start_at: 0, user_id: userId});
+    }
   }
 })

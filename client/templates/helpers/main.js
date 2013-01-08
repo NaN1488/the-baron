@@ -6,3 +6,11 @@
 Handlebars.registerHelper('user_logged_in', function() {
      return (Meteor.user() !== null);
 });
+
+Handlebars.registerHelper('current_channel', function() {
+     return Channels.findOne({name: 'default'});
+});
+
+Handlebars.registerHelper('is_current_channel', function(name) {
+     return (Channels.findOne({name: 'default'}).name == name);
+});
