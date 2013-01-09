@@ -6,3 +6,7 @@
 Handlebars.registerHelper('user_logged_in', function() {
      return (Meteor.user() !== null);
 });
+
+Handlebars.registerHelper('isYourMessage', function() {
+    	return true;
+});
