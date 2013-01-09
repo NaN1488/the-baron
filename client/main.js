@@ -2,9 +2,6 @@
  * Var Declarations
  */
 var months = {};
-var editingChatLineId = "";
-var isLineUnderEdition = false;
-Template.entry.events = {};
 var originalTs = 0;
 
 /**
@@ -64,28 +61,5 @@ function playVideo(key) {
     });
   }
 }
-
-var okcancel_events = function (selector) {
-	return 'keyup '+selector+', keydown'+selector+', focusout '+selector;
-};
-
-
-var make_okcancel_handler = function (options) {
-    var ok = options.ok || function(){};
-    var cancel = options.cancel || function (){};
-
-    return function (evt) {
-      if(evt.type === "keydown" && evt.which === 27) {
-        cancel.call(this, evt);
-      } else if (evt.type === "keyup" && evt.which === 13) {
-        var value = String(evt.target.value || "");
-        if(value)
-          ok.call(this, value, evt);
-        else
-          cancel.call(this, evt);
-      }
-    };
-  };
-
 
 

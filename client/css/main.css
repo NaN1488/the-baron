@@ -158,6 +158,12 @@ input#messageBox {
 [6. Chat] 
 */
 .messagesContainer{overflow-y: auto;width:400px;max-height: 400px;}
+
+.inputBoxEdit {
+  background: url('/edit.jpg') no-repeat left center;
+  padding-left: 200px;
+}
+
 /* ------------------------------------------------------------------
 [7. Extra] 
 */
