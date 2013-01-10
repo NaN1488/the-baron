@@ -6,5 +6,4 @@ Template.current_video_title.title = function (){
 		if (video != undefined) return video.title;
 	}
 	return '';
-	
 }

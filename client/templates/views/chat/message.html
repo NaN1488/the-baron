@@ -1,17 +1,25 @@
 <template name="message">
-<!-- <input type="image" class="deleteChatLine" src="remove.jpg" alt="replay" height="16" width="16" />
-<input type="image" class="editChatLine" src="edit.jpg" alt="replay" height="16" width="16" /> -->
 <p>
-  <span class="muted">
-    <small>
-      {{formmatedDate}}
-    </small>
+	
+  <!--
+  <input type="image" id="showMessageOptions" class="showMessageOptions" src="chat.gif" alt="options" height="24" width="24" />
+	-->	
+
+  <span class="messageOptions" style="display:none;">
+     <span class="muted">
+      <small>
+        {{formmatedDate}}
+      </small>
+    </span>
+    <input type="image" class="deleteChatLine" src="remove.jpg" alt="replay" height="16" width="16" />
+  		<input type="image" class="editChatLine" src="edit.jpg" alt="replay" height="16" width="16" />
+    		{{#if edited}}
+      		<input type="image" src="edited.jpg" alt="edited" height="16" width="16" />
+    		{{/if}}
+   
   </span>
-  <strong> - {{name}}</strong> says: {{message}}
+
+  <strong>{{name}}</strong>: {{message}}
+  
 </p>
-
-  <!-- {{#if edited}}
-    <input type="image" src="edited.jpg" alt="edited" height="16" width="16" />
-  {{/if}} -->
-
 </template>
