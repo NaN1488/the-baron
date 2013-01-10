@@ -19,3 +19,8 @@
 	display: inline-block;
 	float: left;
 }
+.video_result .in_queue{
+	color: green;
+	font-weight: bold;
+	font-size: 11px;
+}

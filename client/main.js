@@ -55,6 +55,9 @@ function playVideo(key) {
                          duration: video_youtube_obj.media$group.yt$duration.seconds,
                          hour: hour, 
                          user: Users.get_current_user()});
+       } else {
+         Videos.update({'key': key}, {$set:{hour: hour, user: Users.get_current_user()}});
+                   
        }
        
        Controller.add_video_to_queue(key);
