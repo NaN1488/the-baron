@@ -4,9 +4,9 @@ VideoResults = {
 		videos_result: null,
 		template_result:'<div class="video_result span2" data-video="%video_id%">'+
 			'<div class="img"><span class="duration">%duration%</span><img src="%img_url%"/></div>'+
+			'<span class="in_queue">%queue%</span>'+
 			'<div class="result_title">%title%</div>'+
 			//'<div class="result_description movie-synopsis">%description%</div>'+
-			''+
 			'</div>',
 		template_prev_button: '<div class="paginator"><button class="btn" id="prev_page" ><i class="icon-chevron-left"></i></button></div>',
 		template_next_button: '<div class="paginator"><button class="btn" id="next_page" ><i class="icon-chevron-right"></i></button></div>'
@@ -40,6 +40,15 @@ VideoResults = {
 	    template = template.replace('%img_url%', entry.media$group.media$thumbnail[3].url);
 	    template = template.replace('%description%', entry.content.$t.substring(0, 70));
 	    template = template.replace('%duration%', minutes);
+	   	var queue = '';
+	   	var position = position_in_queue(video_id)
+	   	if ( position !== ''){
+	   		queue = 'Already in the playlist! (' + $.trim(position)+ ')';	
+	   	}
+
+	   	template = template.replace('%queue%', queue);	
+	    
+
 	    return template;
 	},
 	video: function (id){

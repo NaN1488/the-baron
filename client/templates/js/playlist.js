@@ -1,6 +1,16 @@
 //set videos collection
 Template.playlist.videos = function() {
-	return Videos.find({},{ sort: {hour: -1} });
+  var channel_data = Channels.findOne({name:'default'});
+	var videos;
+  if (typeof(channel_data) !== "undefined"){
+    console.log(channel_data);
+    videos = Videos.find({key:{$in: channel_data.videos_in_queue}}, { sort: {hour: 0}});
+    console.log(videos);
+    
+  }else{
+     videos = Videos.find({},{ sort: {hour: -1} });
+  }
+  return videos;
 }
 
 Template.emptyPlaylist.events({

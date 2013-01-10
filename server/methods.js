@@ -27,9 +27,13 @@ BaronServer = {
 		if (channel === undefined) channel = 'default';
 		channel_data = Channels.findOne({name:channel});
 		videos = channel_data.videos_in_queue;
+		if (videos.length > 0 && videos.indexOf(video_id) > -1) {
+			return {ret:false, error:"the viedo was added recently"};
+		}
 		videos.push(video_id);
 		Channels.update({name:channel}, {$set: {videos_in_queue: videos}});
 		BaronServer.current_time_video();
+		return {ret:true, error:''};
 	}
 }
 /**
