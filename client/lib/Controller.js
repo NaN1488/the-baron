@@ -13,16 +13,19 @@ Controller = {
 			//server call to get the current video
 	 		Meteor.call('current_time_video', function (err, time){
 	 			var current_video_id = Controller.current_video();
-	 			if(_player.video_id != undefined){
+	 			if(_player.video_id != undefined && _player.video_id != ''){
 			 		if ( _player.video_id == current_video_id)
 			 			//the  video is already loaded 
 			 			return false;
 	 			}
 	 			//set current video_id in _player(YoutubeObject)
 	 			//_player.video_id is a custom variable for us to use
+	 			console.log(Channels.findOne({name:'default'}).video_id);
 	 			_player.video_id = current_video_id;
 	 			if (time !== null){
 	 				_player.loadVideoById(current_video_id, time.time);
+	 			}else{
+	 				_player.loadVideoById('', 0);
 	 			}
 	 		});
  		}
@@ -30,13 +33,15 @@ Controller = {
 	// return the current video id for a given channel
 	current_video: function (channel){
 		if (channel === undefined) channel = this._.default_channel;
-		channels = Channels.find({name:channel}).fetch();
-		if(channels.length == 0) return false;
-		return channels[0].video_id;
+		channels = Channels.findOne({name:channel});
+		return channels.video_id;
 	},
 	add_video_to_queue: function(video_id, channel){
 		//send the video_id to the server in order to add it to the queue on the current channel
 		Meteor.call('add_video_to_queue', video_id, this._.default_channel, null);
+	},
+	pop_video: function(video_id){
+		Meteor.call('pop_video', video_id, this._.default_channel, null);
 	},
 	subscribe_channel: function (){
 		// when Channels are updated with a new video_id, trigger Controller.load_video() 

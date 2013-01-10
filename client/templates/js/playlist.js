@@ -25,11 +25,10 @@ Template.emptyPlaylist.events({
 
 //Define events for playlist
 Template.playlist.events({
-  'click input.deleteSong': function() {
-    var reply = prompt("Hey you! You are about to remove a video, give us the passphrase or DIE!", "");
+  'click .deleteSong': function() {
+    console.log((this).key);
     //TODO: check user is admin
-    if(reply == "tategay") 
-      Videos.remove({ key: (this).key });
+    Controller.pop_video((this).key);
   },
   'click input.replaySong': function() {
     var reply = prompt("Hey you! You are about to make us all hear the same song again, it must be GOOD! So give us the passphrase or run!", "");

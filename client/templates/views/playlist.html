@@ -35,7 +35,7 @@
         <th>Stars</th>
         <th>Rating</th> 
         -->
-       <!--  <th>Delete</th> -->
+       <th>Delete</th>
       </tr>
     </thead>
 
@@ -55,6 +55,9 @@
         </td>
         <td>
           {{this.user}}
+        </td>
+        <td>
+          {{#if is_current_user this.user }}<button class="btn deleteSong"><i class="icon-remove"></i></button>{{/if}}
         </td>
         <!-- 
         <td><img src="starts.png"></td>

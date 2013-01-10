@@ -34,6 +34,24 @@ BaronServer = {
 		Channels.update({name:channel}, {$set: {videos_in_queue: videos}});
 		BaronServer.current_time_video();
 		return {ret:true, error:''};
+	},
+	pop_video: function (video_id, channel){
+		if (channel === undefined) channel = 'default';
+		channel_data = Channels.findOne({name:channel});
+		videos = channel_data.videos_in_queue;
+		console.log(videos, videos.indexOf(video_id), video_id);
+		videos.remove(videos.indexOf(video_id));
+		console.log(videos);
+		if (channel_data.video_id == video_id){
+			console.log('blanquea',video_id);
+			Channels.update({name:channel}, {$set: {videos_in_queue: videos, video_id: ''}}, function (){
+				BaronServer.current_time_video();
+			});
+		}else{
+			Channels.update({name:channel}, {$set: {videos_in_queue: videos}});
+		}
+		
+		return {ret:true, error:''};
 	}
 }
 /**
