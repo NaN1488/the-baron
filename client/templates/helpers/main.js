@@ -12,12 +12,12 @@ Handlebars.registerHelper('current_channel', function() {
 });
 
 Handlebars.registerHelper('current_channel_name', function() {
-  var channel = ChannelHelper.current();
-  if(channel == undefined){
-    return ''
-  } else {
-    return channel.name
-  }
+  // var channel = ChannelHelper.current();
+  // if(channel != undefined && channel.name != undefined){
+  //   return channel.name
+  // } else {
+  //   return ''
+  // }
 });
 
 Handlebars.registerHelper('is_current_channel', function(name) {
