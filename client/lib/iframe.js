@@ -17,20 +17,13 @@ if (_player == undefined){
   }
   // The API will call this function when the video player is ready.
   function onPlayerReady(event) {
-    console.log('onPlayerReady');
     Controller.load_video();
-    /*Meteor.call('current_time_video', function (err, time){
-      _player.seekTo(time);
-      _player.playVideo();
-    });*/
   }
 
   // The API calls this function when the player's state changes.
   // The function indicates that when playing a video (state=1)
   function onPlayerStateChange(event) {
-    /*if (event.data == YT.PlayerState.PLAYING) {
-    
-    }*/
+
   }
   function stopVideo() {
     _player.stopVideo();

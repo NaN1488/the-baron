@@ -6,5 +6,4 @@ Template.current_video_title.title = function (){
 		if (videos.length >0) return videos[0].title
 	}
 	return '';
-	
 }

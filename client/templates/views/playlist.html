@@ -1,10 +1,6 @@
 <!-- Playlist
     ================================================== -->
 <template name="playlist">
-  {{#if user_logged_in}}
-  <input type="button" value="Empty Playlist" id="emptyPlaylist" class="btn pull-right" />
-  {{/if}}
-  <h3>Playlist</h3>
 
   <!-- Playlist Searchbox -->
   <!-- 
@@ -25,13 +21,13 @@
   </table>
   -->
 
-  <!-- Playlist Stats Table -->
+  <!-- Playlist Stats Table -->  
   {{#if videos.count}}
-  <table class="table table-hover">
+  <table id="playlist" class="table table-hover">
 
     <thead> 
       <tr>
-        <th>Status</th>
+        <th>Order</th>
         <th>Added@</th>
         <th>Listening</th>
         <th>Shared by</th>
@@ -39,19 +35,17 @@
         <th>Stars</th>
         <th>Rating</th> 
         -->
-       <!--  <th>Delete</th> -->
+       <th>Delete</th>
       </tr>
     </thead>
 
     <tbody>
       {{#each videos}}
-      <tr>
+      <tr {{#if is_current_video this.key}} class="current"{{/if}}>
         <td>
-        {{#if this.current}}
-          <strong>Playing</strong>
-          {{else}}
+          {{{position_in_queue this.key}}}
           <!-- <input type="image" class="replaySong" src="replay.jpg" alt="replay" height="16" width="16" /> -->
-          {{/if}}
+
         </td>
         <td>
           {{this.hour}}
@@ -61,6 +55,9 @@
         </td>
         <td>
           {{this.user}}
+        </td>
+        <td>
+          {{#if is_current_user this.user }}<button class="btn deleteSong"><i class="icon-remove"></i></button>{{/if}}
         </td>
         <!-- 
         <td><img src="starts.png"></td>

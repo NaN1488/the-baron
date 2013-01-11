@@ -2,9 +2,6 @@
  * Var Declarations
  */
 var months = {};
-var editingChatLineId = "";
-var isLineUnderEdition = false;
-Template.entry.events = {};
 var originalTs = 0;
 
 /**
@@ -49,46 +46,23 @@ function playVideo(key) {
       var hour = locale.formmatedDate;
 
        //set current false for all videos
-       console.log('before update videos');
-       Videos.update({current: true}, {$set: {current: false}}, false, true);
-       if (Videos.find({'key': key}).count() > 0) {
-         Videos.update({'key': key}, {$set: {current: true}}, false, true);
-       } else {
-        video_youtube_obj = VideoResults.video(key);
+      // console.log('before update videos');
+       //Videos.update({current: true}, {$set: {current: false}}, false, true);
+       if (Videos.find({'key': key}).count() == 0) {
+          video_youtube_obj = VideoResults.video(key);
           Videos.insert({ key: key, 
                          title: video_youtube_obj.title.$t,
                          duration: video_youtube_obj.media$group.yt$duration.seconds,
-                         current: true, 
                          hour: hour, 
                          user: Users.get_current_user()});
+       } else {
+         Videos.update({'key': key}, {$set:{hour: hour, user: Users.get_current_user()}});
+                   
        }
-
-       Controller.change_video(key);
+       
+       Controller.add_video_to_queue(key);
     });
   }
 }
-
-var okcancel_events = function (selector) {
-	return 'keyup '+selector+', keydown'+selector+', focusout '+selector;
-};
-
-
-var make_okcancel_handler = function (options) {
-    var ok = options.ok || function(){};
-    var cancel = options.cancel || function (){};
-
-    return function (evt) {
-      if(evt.type === "keydown" && evt.which === 27) {
-        cancel.call(this, evt);
-      } else if (evt.type === "keyup" && evt.which === 13) {
-        var value = String(evt.target.value || "");
-        if(value)
-          ok.call(this, value, evt);
-        else
-          cancel.call(this, evt);
-      }
-    };
-  };
-
 
 
