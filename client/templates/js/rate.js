@@ -29,9 +29,10 @@ Template.rateas.events({
     'click a.stars': function(event) {
       if (Meteor.user() != null) {
         //current_video_id = CurrentVideos.findOne({channel: 'default'}).video_id;
-        current_video_id = Channels.find({name: 'default'}).fetch()[0].video_id;
+        current_video_id = Channels.findOne({name: 'default'}).video_id;
         video_rate = parseInt($(event.target).attr('id').slice(5,6));
         channel_id = Channels.findOne({name: 'default'})._id
+        user_rated_id = Videos.findOne({key: current_video_id, current: true}).user;
         var already_rate = Rates.findOne({video: current_video_id, channel: channel_id, user_id: Meteor.userId()});
         if (already_rate == undefined) {
           Rates.insert({video: current_video_id, channel: channel_id, rate: video_rate, user_id: Meteor.userId()});
