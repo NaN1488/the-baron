@@ -54,9 +54,14 @@ function playVideo(key) {
                          title: video_youtube_obj.title.$t,
                          duration: video_youtube_obj.media$group.yt$duration.seconds,
                          hour: hour, 
-                         user: Users.get_current_user()});
+                         user: Users.get_current_user(),
+                         user_id: Meteor.userId()});
        } else {
-         Videos.update({'key': key}, {$set:{hour: hour, user: Users.get_current_user()}});
+        Videos.update({'key': key}, {$set:{
+          hour: hour, 
+          user: Users.get_current_user(),
+          user_id: Meteor.userId()}
+        });
                    
        }
        

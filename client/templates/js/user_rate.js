@@ -3,8 +3,8 @@ Template.user_rate.string_user_rate = function(){
   rate = "Unknown.";
   var channel = Channels.find({name: 'default'}).fetch()[0];
      if (channel != undefined) {  
-      if(Meteor.user().emails != undefined) {
-       user_id = Meteor.user().emails[0].address;
+      if (Meteor.userId() != undefined) {
+       user_id = Meteor.userId();
       } else {
         user_id = "Unknown";
       }

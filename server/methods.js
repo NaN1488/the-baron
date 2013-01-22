@@ -54,8 +54,8 @@ BaronServer = {
 	},
 	add_ordered_video: function (videos, video_id, channel){
 		
-		var user_video = Videos.findOne({key: video_id}).user;
-		if (videos.length == 0 || user_video == "anonymous") {
+		var user_video = Videos.findOne({key: video_id}).user_id;
+		if (videos.length == 0 || user_video == null) {
 			videos.push(video_id);
 		}
 		else {
@@ -63,11 +63,11 @@ BaronServer = {
 			var count = 0;
 			var flag = true;
 			while(flag && count < videos.length) {
-				user = Videos.findOne({key: videos[count]}).user;
+				user = Videos.findOne({key: videos[count]}).user_id;
 				if(user == user_video) { 
 					user_playlist.splice(0, user_playlist.length);
 				} else {
-					if ((user == "anonymous" && count > 0) || user_playlist.indexOf(user) > -1 ) {
+					if ((user == null && count > 0) || user_playlist.indexOf(user) > -1 ) {
 						videos.splice(count,0,video_id);
 						flag = false;
 					} else {
@@ -85,7 +85,7 @@ BaronServer = {
 	},
 	add_weighted_video: function (videos, video_id, channel){
 		
-		var user_video = Videos.findOne({key: video_id}).user;
+		var user_video = Videos.findOne({key: video_id}).user_id;
 		if (videos.length == 0 || user_video == "anonymous") {
 			videos.push(video_id);
 		}
@@ -101,7 +101,7 @@ BaronServer = {
 			var flag = true;
 			var another =  false;
 			while(flag && count < videos.length) {
-				var user = Videos.findOne({key: videos[count]}).user;
+				var user = Videos.findOne({key: videos[count]}).user_id;
 				var user_rated = UserRates.findOne({channel: channel, user:user});
 				if(user_rated == undefined) {
 					user_rate = 2;
@@ -112,7 +112,7 @@ BaronServer = {
 					user_playlist.splice(0, user_playlist.length);
 					another = true;
 				} else {
-					if ((user == "anonymous" && count > 0) || user_playlist.indexOf(user) > -1 ) {
+					if ((user == null && count > 0) || user_playlist.indexOf(user) > -1 ) {
 						videos.splice(count,0,video_id);
 						flag = false;
 					} else if (user_video_rate < user_rate && !(another) && count > 0){
