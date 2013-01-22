@@ -2,13 +2,22 @@
 Template.playlist.videos = function() {
   var channel_data = Channels.findOne({name:'default'});
 	var videos;
+  var video_found;
   if (typeof(channel_data) !== "undefined"){
-    console.log(channel_data);
-    videos = Videos.find({key:{$in: channel_data.videos_in_queue}}, { sort: {hour: 0}});
-    console.log(videos);
+    videos2 = Videos.find({key:{$in: channel_data.videos_in_queue}}, {}).fetch();
+    videos = new Array();
+    $(channel_data.videos_in_queue).each( function(i,video) {
+        $(videos2).each( function(j,video_info) {
+          if(video_info.key == video) {
+            video_found = video_info;
+          }
+        });
+        videos[i] = video_found;
+    });
     
+    console.log(videos);    
   }else{
-     videos = Videos.find({},{ sort: {hour: -1} });
+     videos = Videos.find({},{  }).fetch();
   }
   return videos;
 }

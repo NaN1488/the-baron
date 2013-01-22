@@ -32,12 +32,13 @@ Template.rateas.events({
         current_video_id = Channels.findOne({name: 'default'}).video_id;
         video_rate = parseInt($(event.target).attr('id').slice(5,6));
         channel_id = Channels.findOne({name: 'default'})._id
-        user_rated_id = Videos.findOne({key: current_video_id, current: true}).user;
-        var already_rate = Rates.findOne({video: current_video_id, channel: channel_id, user_id: Meteor.userId()});
+        user_rated = Videos.findOne({key: current_video_id}).user;
+
+        var already_rate = Rates.findOne({video: current_video_id, channel: channel_id, user_id: Meteor.userId(), user_rated:user_rated});
         if (already_rate == undefined) {
-          Rates.insert({video: current_video_id, channel: channel_id, rate: video_rate, user_id: Meteor.userId()});
+          Rates.insert({video: current_video_id, channel: channel_id, rate: video_rate, user_id: Meteor.userId(), user_rated:user_rated});
         } else {
-          Rates.update({video: current_video_id, channel: channel_id, user_id: Meteor.userId()}, {$set: {rate:video_rate}});
+          Rates.update({video: current_video_id, channel: channel_id, user_id: Meteor.userId(), user_rated:user_rated}, {$set: {rate:video_rate}});
         }
       } else {
         alert("be connected to rate");

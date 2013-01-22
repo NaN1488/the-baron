@@ -3,9 +3,13 @@ Template.user_rate.string_user_rate = function(){
   rate = "Unknown.";
   var channel = Channels.find({name: 'default'}).fetch()[0];
      if (channel != undefined) {  
-       user_id = Meteor.user()._id;
+      if(Meteor.user().emails != undefined) {
+       user_id = Meteor.user().emails[0].address;
+      } else {
+        user_id = "unknown";
+      }
        current_channel_id = channel._id;
-       cursor = Rates.find({user_id: user_id, channel: current_channel_id});
+       cursor = Rates.find({user_rated: user_id, channel: current_channel_id});
        var avg = 0, total = 0;
        count = cursor.count();
        if(count == 0) {
