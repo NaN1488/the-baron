@@ -6,41 +6,36 @@ Template.user_rate.string_user_rate = function(){
       if(Meteor.user().emails != undefined) {
        user_id = Meteor.user().emails[0].address;
       } else {
-        user_id = "unknown";
+        user_id = "Unknown";
       }
        current_channel_id = channel._id;
-       cursor = Rates.find({user_rated: user_id, channel: current_channel_id});
-       var avg = 0, total = 0;
-       count = cursor.count();
-       if(count == 0) {
-         rate = "Lonely Ranger.";
+       user_rate = UserRates.findOne({user: user_id, channel: current_channel_id});
+       
+       if(user_rate == undefined) {
+         rate = "Not yet rated.";
        } else {
-         cursor.forEach(function(e) {
-           total += e.rate;
-         });
-        avg = (total / count);
-
+        var avg = user_rate.rate;
         ///////////////// Aca mostramos el rate del usuario por canal
         switch (true)
         {
           case ((avg > 0) && (avg <= 1)):
-            rate = "Your mother even hates you.";
+            rate = "BAAAD.";
             break;
 
           case ((avg > 1) && (avg <= 2)):
-            rate = "You really suck. Continue this way.";
+            rate = "Not Good.";
             break;
 
           case ((avg > 2) && (avg <= 3)):
-            rate = "God and Devil.";
+            rate = "More and less.";
             break;
 
           case ((avg > 3) && (avg <= 4)):
-            rate = "Improving.";
+            rate = "Not bad.";
             break;
 
           case ((avg > 4) && (avg <= 5)):
-            rate = "King of the world.";
+            rate = "Great.";
             break;
 
           default:
