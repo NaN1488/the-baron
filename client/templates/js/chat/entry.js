@@ -35,8 +35,13 @@ var make_okcancel_handler = function (options) {
 
 Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
     ok: function(text, event) {
-      //var nameEntry = Meteor.user().emails[0].address;
+      // Avoiding enter duplication
+      $("#messageBox").val("Sending message...");
+      $("#messageBox").attr("disabled", true);
+      canSendMessage = false;
+
       var nameEntry = Users.get_current_user();
+      
       if(nameEntry.value != "") {
         Meteor.call('getTime', function (error, result) { 
           var ts = result.timestamp;
@@ -52,9 +57,7 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
           var formmatedDate = locale.formmatedDate;
 
           if( !isLineUnderEdition ) {
-             $("#messageBox").val("Sending message...");
-             $("#messageBox").attr("disabled", true);
-             canSendMessage = false;
+            
               Messages.insert({
                name:    nameEntry, 
                message: text, 
@@ -73,13 +76,18 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
             Messages.update({ _id: editingChatLineId }, 
                             { message: text,
                               name:    nameEntry, 
-                              //time:    ts,
                               time:    originalTs, 
                               city:    location,
                               utc:     localTime,
                               formmatedDate: formmatedDate, 
                               edited: true},
-                            { multi: false });
+                            { multi: false 
+                            }, function() {
+                                $("#messageBox").attr("disabled", false);
+                                $("#messageBox").val("");
+                                canSendMessage = true;
+                            });
+
             $("#editingMessage").css('display', 'none');
             isLineUnderEdition = false;
             $("#messageBox").removeClass("inputBoxEdit");
