@@ -15,6 +15,14 @@ Meteor.startup(function() {
     }
   }
   if (Channels.find().count() === 0){
-    Channels.insert({name:'default', video_id:'', start_at: 0});
+    Channels.insert({name:'default', video_id:'', start_at: 0, videos_in_queue:[]});
+  }else{
+    Channels.update({name:'default'}, 
+        {$set: {
+          videos_in_queue: [],
+          video_id: '',
+          start_at: 0
+        }
+      });
   }
 });

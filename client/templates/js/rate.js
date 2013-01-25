@@ -27,16 +27,45 @@ Template.rateas.rate = function(){
 Template.rateas.events({
     //set rate for the current video
     'click a.stars': function(event) {
+      console.log("star_click");
       if (Meteor.user() != null) {
-        //current_video_id = CurrentVideos.findOne({channel: 'default'}).video_id;
-        current_video_id = Channels.find({name: 'default'}).fetch()[0].video_id;
-        video_rate = parseInt($(event.target).attr('id').slice(5,6));
-        channel_id = Channels.findOne({name: 'default'})._id
-        var already_rate = Rates.findOne({video: current_video_id, channel: channel_id, user_id: Meteor.userId()});
-        if (already_rate == undefined) {
-          Rates.insert({video: current_video_id, channel: channel_id, rate: video_rate, user_id: Meteor.userId()});
+        user_rated = Videos.findOne({key: current_video_id}).user_id;
+        if(user_rated == Meteor.userId()) {
+          alert("you cannot vote yourself");
         } else {
-          Rates.update({video: current_video_id, channel: channel_id, user_id: Meteor.userId()}, {$set: {rate:video_rate}});
+          //current_video_id = CurrentVideos.findOne({channel: 'default'}).video_id;
+          current_video_id = Channels.findOne({name: 'default'}).video_id;
+          video_rate = parseInt($(event.target).attr('id').slice(5,6));
+          channel_id = Channels.findOne({name: 'default'})._id
+          
+
+          var already_rate = Rates.findOne({video: current_video_id, channel: channel_id, user_id: Meteor.userId(), user_rated:user_rated});
+          var already_user_rate = UserRates.findOne({user: user_rated, channel: channel_id});
+          if (already_rate == undefined) {
+            //video never rated
+            Rates.insert({video: current_video_id, channel: channel_id, rate: video_rate, user_id: Meteor.userId(), user_rated:user_rated});
+            if (already_user_rate == undefined) {
+              //user never rated
+              UserRates.insert({user: user_rated, channel: channel_id, rate: (video_rate*1.0), rate_qty: 1, previous_rate:0});
+            }
+            else {
+              //update user rate
+              var quantity = already_user_rate.rate_qty;
+              var new_rate = ((already_user_rate.rate * quantity) + video_rate) / (quantity + 1);
+              var old_rate = already_user_rate.rate;
+              quantity = quantity + 1;
+              UserRates.update({user: user_rated, channel: channel_id}, {$set: {rate: new_rate, rate_qty: quantity, previous_rate:old_rate}})
+            }
+          } else {
+            //video already rated
+            Rates.update({video: current_video_id, channel: channel_id, user_id: Meteor.userId(), user_rated:user_rated}, {$set: {rate:video_rate}});
+            var quantity = already_user_rate.rate_qty - 1;
+            var new_rate = ((already_user_rate.previous_rate * quantity) + video_rate) / (quantity + 1);
+            var old_rate = already_user_rate.previous_rate;
+            quantity = quantity + 1;
+            //update user rate
+            UserRates.update({user: user_rated, channel: channel_id}, {$set: {rate: new_rate, rate_qty: quantity, previous_rate:old_rate}})
+          }
         }
       } else {
         alert("be connected to rate");

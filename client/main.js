@@ -46,21 +46,26 @@ function playVideo(key) {
       var hour = locale.formmatedDate;
 
        //set current false for all videos
-       console.log('before update videos');
-       Videos.update({current: true}, {$set: {current: false}}, false, true);
-       if (Videos.find({'key': key}).count() > 0) {
-         Videos.update({'key': key}, {$set: {current: true}}, false, true);
-       } else {
-        video_youtube_obj = VideoResults.video(key);
+      // console.log('before update videos');
+       //Videos.update({current: true}, {$set: {current: false}}, false, true);
+       if (Videos.find({'key': key}).count() == 0) {
+          video_youtube_obj = VideoResults.video(key);
           Videos.insert({ key: key, 
                          title: video_youtube_obj.title.$t,
                          duration: video_youtube_obj.media$group.yt$duration.seconds,
-                         current: true, 
                          hour: hour, 
-                         user: Users.get_current_user()});
+                         user: Users.get_current_user(),
+                         user_id: Meteor.userId()});
+       } else {
+        Videos.update({'key': key}, {$set:{
+          hour: hour, 
+          user: Users.get_current_user(),
+          user_id: Meteor.userId()}
+        });
+                   
        }
-
-       Controller.change_video(key);
+       
+       Controller.add_video_to_queue(key);
     });
   }
 }

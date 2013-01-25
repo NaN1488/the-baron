@@ -11,12 +11,16 @@
 	float: left;
 	background-color: black;
 	font-size: 10px;
-	margin-left: 25px;
 	padding: 0 2px 0 2px;
-	display: block;
+	display: inline-block;
 }
 
 .paginator{
 	display: inline-block;
 	float: left;
+}
+.video_result .in_queue{
+	color: green;
+	font-weight: bold;
+	font-size: 11px;
 }
