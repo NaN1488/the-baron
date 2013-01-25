@@ -1,4 +1,4 @@
-
+  var optionsActive = false;
 
   Template.message.events({
     'click input.deleteChatLine': function() {
@@ -27,8 +27,10 @@
     'click input#showMessageOptions': function(){
       if($(".messageOptions").css('display') == 'none') {
         $(".messageOptions").show("slow");
+        optionsActive = true;
       } else {
         $(".messageOptions").hide("slow");
+        optionsActive = false;
       } 
     }
   });

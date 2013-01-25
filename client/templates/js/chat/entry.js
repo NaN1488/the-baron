@@ -43,7 +43,7 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
       var nameEntry = Users.get_current_user();
       
       if(nameEntry.value != "") {
-        Meteor.call('getTime', function (error, result) { 
+        Meteor.call('getTime', function (error, result) {
           var ts = result.timestamp;
           var utc = result.utc;
           var date = result.date;
@@ -54,10 +54,9 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
           var locale = calcTime('Buenos Aires', offset, utc);
           var location = locale.city;
           var localTime = locale.time;
-          var formmatedDate = locale.formmatedDate;
+          var formmatedDate = locale.time; //formmatedDate;
 
           if( !isLineUnderEdition ) {
-            
               Messages.insert({
                name:    nameEntry, 
                message: text, 
@@ -71,6 +70,10 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
                   $("#messageBox").attr("disabled", false);
                   $("#messageBox").val("");
                   canSendMessage = true;
+                  // This will show th options of a new message if needed
+                  if( optionsActive ) setTimeout( function() { 
+                    $(".messageOptions").show(); 
+                  }, 1);
               });
           } else {
             Messages.update({ _id: editingChatLineId }, 
@@ -81,8 +84,8 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
                               utc:     localTime,
                               formmatedDate: formmatedDate, 
                               edited: true},
-                            { multi: false 
-                            }, function() {
+                              { multi: false }, 
+                              function() {
                                 $("#messageBox").attr("disabled", false);
                                 $("#messageBox").val("");
                                 canSendMessage = true;
