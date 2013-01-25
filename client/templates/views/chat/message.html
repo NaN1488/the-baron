@@ -1,10 +1,6 @@
 <template name="message">
-<p>
-	
-  <!--
-  <input type="image" id="showMessageOptions" class="showMessageOptions" src="chat.gif" alt="options" height="24" width="24" />
-	-->	
-
+<div class="messageLine">
+  <hr>
   <span class="messageOptions" style="display:none;">
      <span class="muted">
       <small>
@@ -16,10 +12,9 @@
     		{{#if edited}}
       		<input type="image" src="edited.jpg" alt="edited" height="16" width="16" />
     		{{/if}}
-   
   </span>
 
   <strong>{{name}}</strong>: {{message}}
-  
-</p>
+
+</div>
 </template>

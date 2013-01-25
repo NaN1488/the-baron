@@ -157,11 +157,17 @@ input#messageBox {
 /* ------------------------------------------------------------------
 [6. Chat] 
 */
-.messagesContainer{overflow-y: auto;width:400px;max-height: 400px;}
+.messagesContainer{overflow-y: auto; overflow:hidden; width:400px; max-height: 400px;}
 
 .inputBoxEdit {
   background: url('/edit.jpg') no-repeat left center;
-  padding-left: 200px;
+  padding-left: 200px; 
+}
+
+.messageLine {
+  /*max-height: 30px;
+  font-size: 12px;
+  line-height: -1px;*/
 }
 
 /* ------------------------------------------------------------------

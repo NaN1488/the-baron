@@ -10,7 +10,7 @@ var editingChatLineId = "";
 var isLineUnderEdition = false;
 Template.entry.events = {};
 var originalTs = 0;
-
+var canSendMessage = true;
 
 var okcancel_events = function (selector) {
   return 'keyup '+selector+', keydown'+selector+', focusout '+selector;
@@ -25,7 +25,7 @@ var make_okcancel_handler = function (options) {
         cancel.call(this, evt);
       } else if (evt.type === "keyup" && evt.which === 13) {
         var value = String(evt.target.value || "");
-        if(value)
+        if(value && canSendMessage)
           ok.call(this, value, evt);
         else
           cancel.call(this, evt);
@@ -52,15 +52,23 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
           var formmatedDate = locale.formmatedDate;
 
           if( !isLineUnderEdition ) {
-            Messages.insert({
-             name:    nameEntry, 
-             message: text, 
-             time:    ts, 
-             city:    location,
-             utc:     localTime,
-             formmatedDate: formmatedDate,
-             edited: false
-            });
+             $("#messageBox").val("Sending message...");
+             $("#messageBox").attr("disabled", true);
+             canSendMessage = false;
+              Messages.insert({
+               name:    nameEntry, 
+               message: text, 
+               time:    ts, 
+               city:    location,
+               utc:     localTime,
+               channel: "default",
+               formmatedDate: formmatedDate,
+               edited: false
+              }, function(){         
+                  $("#messageBox").attr("disabled", false);
+                  $("#messageBox").val("");
+                  canSendMessage = true;
+              });
           } else {
             Messages.update({ _id: editingChatLineId }, 
                             { message: text,
@@ -76,7 +84,7 @@ Template.entry.events[okcancel_events('#messageBox')] = make_okcancel_handler({
             isLineUnderEdition = false;
             $("#messageBox").removeClass("inputBoxEdit");
           }
-          event.target.value = "";
+          //event.target.value = "";
          });
       }
     }
